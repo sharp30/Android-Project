@@ -22,4 +22,6 @@
     <string name="btn_explore">Explore</string>
     <string name="btn_leader_board">Leader Board!</string>
     <string name="btn_my_contests">My Contests!</string>
+
+    <string name="btn_create_contest">Create Contest!</string>
 </resources>
