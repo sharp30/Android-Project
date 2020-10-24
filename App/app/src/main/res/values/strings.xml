@@ -6,7 +6,10 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
-    <string name="create_account">Create Account</string>
-    <string name="login_now">Login now!</string>
-    <string name="create">Create</string>
+    <string name="btn_create_account">Create Account</string>
+    <string name="btn_login">Login now!</string>
+    <string name="btn_create">Create</string>
+    <string name="btn_contests">Contests!</string>
+    <string name="btn_history">History!</string>
+    <string name="btn_my_details">My details!</string>
 </resources>
