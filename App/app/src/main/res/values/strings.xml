@@ -8,4 +8,7 @@
     <string name="hello_world">Hello Square World!</string>
     <string name="history_results_image">History Results</string>
     <string name="update_button">Update!</string>
+    <string name="my_contests_btn">My Contests</string>
+    <string name="explore_btn">Explore</string>
+    <string name="leaderboard_btn">LeaderBoard</string>
 </resources>
