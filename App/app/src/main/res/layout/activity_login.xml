@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tvTi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
@@ -10,29 +11,28 @@
         android:id="@+id/etUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="96dp"
+        android:background="@null"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="@string/login_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        android:background="@null"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="86dp"
+        android:layout_marginTop="60dp"
+        android:background="@null"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/etUserName"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/etUserName"
-        app:layout_constraintTop_toBottomOf="@+id/etUserName"
-        android:background="@null"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/etUserName" />
 
     <TextView
         android:id="@+id/tvRegister"
@@ -50,7 +50,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="132dp"
-        android:text="TextView"
+        android:text="@string/application_name"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
