@@ -10,7 +10,7 @@
     <string name="update_button">Update!</string>
     <string name="my_contests_btn">My Contests</string>
     <string name="explore_btn">Explore</string>
-    <string name="leaderboard_btn">LeaderBoard</string>
+    <string name="leaderboard">LeaderBoard</string>
     <string name="login_name">Name</string>
     <string name="application_name">WalkMe</string>
 </resources>
