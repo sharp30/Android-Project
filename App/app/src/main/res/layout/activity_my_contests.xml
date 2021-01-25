@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".Contests.MyContestsActivity">
 
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="352dp"
+        android:layout_height="196dp"
+        android:layout_marginBottom="96dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_create_contest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
     <Button
         android:id="@+id/btn_create_contest"
         android:layout_width="wrap_content"
@@ -15,4 +26,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,7 @@ import com.App.R;
 public class MyContestsActivity extends AppCompatActivity {
 
     Button createContestBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,9 +23,12 @@ public class MyContestsActivity extends AppCompatActivity {
         createContestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),CreateContestActivity.class);
+                Intent i = new Intent(getApplicationContext(), CreateContestActivity.class);
                 startActivity(i);
             }
         });
     }
+
+
+
 }

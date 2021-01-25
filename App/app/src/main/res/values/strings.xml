@@ -6,22 +6,11 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
-    <!-- login activity !-->
-    <string name="btn_create_account">Create Account</string>
-    <string name="btn_login">Login now!</string>
-
-    <!-- create account activity !-->--
-    <string name="btn_create">Create</string>
-
-    <!-- home activity !-->
-    <string name="btn_contests">Contests!</string>
-    <string name="btn_history">History!</string>
-    <string name="btn_my_details">My details!</string>
-
-    <!-- contests activity !-->
-    <string name="btn_explore">Explore</string>
-    <string name="btn_leader_board">Leader Board!</string>
-    <string name="btn_my_contests">My Contests!</string>
-
-    <string name="btn_create_contest">Create Contest!</string>
+    <string name="history_results_image">History Results</string>
+    <string name="update_button">Update!</string>
+    <string name="my_contests_btn">My Contests</string>
+    <string name="explore_btn">Explore</string>
+    <string name="leaderboard">LeaderBoard</string>
+    <string name="login_name">Name</string>
+    <string name="application_name">WalkMe</string>
 </resources>

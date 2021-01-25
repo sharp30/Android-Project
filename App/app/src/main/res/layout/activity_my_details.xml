@@ -6,4 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".MyDetailsActivity">
 
+    <SeekBar
+        android:id="@+id/sbHeight"
+        android:layout_width="293dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/sbWeight"
+        android:layout_width="293dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="116dp"
+        app:layout_constraintEnd_toEndOf="@+id/sbHeight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/sbHeight"
+        app:layout_constraintTop_toBottomOf="@+id/sbHeight" />
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="97dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/roundedbutton"
+        android:text="@string/update_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/sbWeight"
+        app:layout_constraintStart_toStartOf="@+id/sbWeight"
+        app:layout_constraintTop_toBottomOf="@+id/sbWeight"
+        app:layout_constraintVertical_bias="0.686" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
