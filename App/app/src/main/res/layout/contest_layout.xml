@@ -1,45 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvName"
-            android:textSize="20dp"
-            android:text="title"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:textColor="#0e82f5"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvDate"
-            android:textSize="20dp"
-            android:text="subtitle"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:textColor="#6ef50e"
-        />
-    </LinearLayout>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/tvDate"
+        android:layout_width="92dp"
+        android:layout_height="63dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="#972323"
+        app:layout_constraintBottom_toBottomOf="@+id/tvAmount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvName"
+        app:layout_constraintVertical_bias="0.485" />
+
+    <TextView
         android:id="@+id/tvAmount"
-        android:textColor="#dc130c"
-        android:textSize="30sp"
-        android:text="50$"
-        android:gravity="right"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        />
-</LinearLayout>
+        android:layout_width="216dp"
+        android:layout_height="38dp"
+        android:text="txt"
+        android:textColor="#03A9F4"
+        app:layout_constraintEnd_toStartOf="@+id/tvDate"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvName"
+        tools:layout_editor_absoluteY="102dp" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="216dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:text="txt"
+        android:textColor="#36DA3D"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvAmount"
+        app:layout_constraintEnd_toStartOf="@+id/tvDate"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.08" />
+</androidx.constraintlayout.widget.ConstraintLayout>
