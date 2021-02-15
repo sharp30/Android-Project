@@ -82,6 +82,8 @@ public class HomeActivity extends Activity implements SensorEventListener {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), HistoryActivity.class);
+
+                saveCount();
                 startActivity(i);
             }
         });
@@ -100,7 +102,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
         //other option - save just today - and others on sqldb
          df = new SimpleDateFormat("dd/MM/yyyy");
 
-        stepCount = sp.getInt(df.format(new Date()),0);
+        stepCount = 0;//sp.getInt(df.format(new Date()),0);
         pbStep.setProgress(stepCount);
         tvStepCount.setText(String.valueOf(stepCount));
 
@@ -132,6 +134,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
         super.onResume();
         if (stepCounter != null)
             sensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_FASTEST);
+        if(stepCount == 0)
         stepCount = sp.getInt(df.format(new Date()),0);
 
     }
@@ -143,8 +146,12 @@ public class HomeActivity extends Activity implements SensorEventListener {
             sensorManager.unregisterListener(this, stepCounter);
             stepCounter = null;
         }
+    }
+    protected void saveCount()
+    {
         SharedPreferences.Editor editor = sp.edit() ;
         editor.putInt(df.format(new Date()),stepCount);
         editor.apply();
+
     }
 }

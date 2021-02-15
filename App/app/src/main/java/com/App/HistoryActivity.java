@@ -49,7 +49,6 @@ public class HistoryActivity extends AppCompatActivity {
         int[] colors = new int[5];
         for(int i=0; i<5;i++)
         {
-            cal.add(Calendar.DATE, -1);
 
             // Get current date of calendar which point to the yesterday now
             Date day = cal.getTime();
@@ -61,8 +60,9 @@ public class HistoryActivity extends AppCompatActivity {
             if(val>TARGET)
                 colors[i] = Color.GREEN;
 
-            entries.add(new BarEntry(val, i));
+            entries.add(new BarEntry(val, 4-i));
             labels.add(date);
+            cal.add(Calendar.DATE, -1);
         }
         BarDataSet bardataset = new BarDataSet(entries, "Cells");
         BarData data = new BarData(labels, bardataset);
