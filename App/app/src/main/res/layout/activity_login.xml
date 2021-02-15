@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:background="@null"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/login_name"
@@ -26,7 +25,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:background="@null"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/etUserName"
@@ -34,8 +32,8 @@
         app:layout_constraintStart_toStartOf="@+id/etUserName"
         app:layout_constraintTop_toBottomOf="@+id/etUserName" />
 
-    <TextView
-        android:id="@+id/tvRegister"
+    <Button
+        android:id="@+id/btn_register"
         android:layout_width="141dp"
         android:layout_height="39dp"
         android:layout_marginTop="56dp"

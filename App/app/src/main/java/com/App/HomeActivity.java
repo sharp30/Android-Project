@@ -62,7 +62,6 @@ public class HomeActivity extends Activity implements SensorEventListener {
                     default:
                         return false;
                 }
-
                 return true;
             }
         });

@@ -17,18 +17,18 @@
         <activity android:name=".Contests.CreateContestActivity" />
         <activity android:name=".Contests.ExploreContestsActivity"/>
         <activity android:name=".Contests.MyContestsActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".ContestsActivity" />
-        <activity android:name=".HistoryActivity" />
-        <activity android:name=".MyDetailsActivity" />
-        <activity android:name=".HomeActivity">
+        <activity android:name=".LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".ContestsActivity" />
+        <activity android:name=".HistoryActivity" />
+        <activity android:name=".MyDetailsActivity" />
+        <activity android:name=".HomeActivity"/>
     </application>
 
 </manifest>
