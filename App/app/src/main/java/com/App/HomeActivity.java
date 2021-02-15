@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -22,6 +23,11 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 public class HomeActivity extends Activity implements SensorEventListener {
 
     ImageButton historyBtn;
@@ -33,6 +39,8 @@ public class HomeActivity extends Activity implements SensorEventListener {
     TextView tvStepCount;
     int stepCount;
     BottomNavigationView bottomNavigationView;
+    SharedPreferences sp;
+    DateFormat df;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
             //ask for permission
             requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
         }
+        sp = getSharedPreferences("steps",0);
         bottomNavigationView = findViewById(R.id.btn_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -88,9 +97,15 @@ public class HomeActivity extends Activity implements SensorEventListener {
         tvStepCount = findViewById(R.id.tvStepsAmount);
         pbStep = findViewById(R.id.progress_bar);
 
-        stepCount = 100;
+        //other option - save just today - and others on sqldb
+         df = new SimpleDateFormat("dd/MM/yyyy");
+
+        stepCount = sp.getInt(df.format(new Date()),0);
         pbStep.setProgress(stepCount);
         tvStepCount.setText(String.valueOf(stepCount));
+
+
+
 
 
     }
@@ -98,6 +113,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (sensorEvent.sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
+
             stepCount++;
             //stepCount = (int) sensorEvent.values[0];
             pbStep.setProgress(stepCount);
@@ -116,6 +132,8 @@ public class HomeActivity extends Activity implements SensorEventListener {
         super.onResume();
         if (stepCounter != null)
             sensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_FASTEST);
+        stepCount = sp.getInt(df.format(new Date()),0);
+
     }
 
     @Override
@@ -125,5 +143,8 @@ public class HomeActivity extends Activity implements SensorEventListener {
             sensorManager.unregisterListener(this, stepCounter);
             stepCounter = null;
         }
+        SharedPreferences.Editor editor = sp.edit() ;
+        editor.putInt(df.format(new Date()),stepCount);
+        editor.apply();
     }
 }

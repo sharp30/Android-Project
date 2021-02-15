@@ -47,11 +47,11 @@
 
     <Button
         android:id="@+id/btn_create_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="71dp"
+        android:layout_height="48dp"
         android:layout_marginTop="56dp"
         android:background="@drawable/roundedbutton"
-        android:text="Button"
+        android:text="@string/register_btn"
         app:layout_constraintEnd_toEndOf="@+id/etPassword"
         app:layout_constraintStart_toStartOf="@+id/etPassword"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />

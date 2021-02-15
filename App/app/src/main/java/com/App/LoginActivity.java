@@ -22,9 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
-
-        prefs = this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE);
+        prefs = this.getSharedPreferences("values", Context.MODE_PRIVATE);
         String logged = prefs.getString("logged",null);
 
         if(logged != null)
@@ -52,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                 //todo: check if login is ok!
 
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("logged",etPassword.getText().toString());
+                editor.putString("logged",etUsername.getText().toString());
                 editor.apply();
                 Intent next = new Intent(getApplicationContext(),HomeActivity.class);
                 startActivity(next);
