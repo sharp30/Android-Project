@@ -135,7 +135,11 @@ public class HomeActivity extends Activity implements SensorEventListener {
         if (stepCounter != null)
             sensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_FASTEST);
         if(stepCount == 0)
-        stepCount = sp.getInt(df.format(new Date()),0);
+        {
+            stepCount = sp.getInt(df.format(new Date()),0);
+            pbStep.setProgress(stepCount);
+            tvStepCount.setText(String.valueOf(stepCount));
+        }
 
     }
 
