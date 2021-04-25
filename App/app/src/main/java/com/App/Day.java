@@ -8,7 +8,7 @@ public class Day
     protected int steps;
     protected double weight;
 
-    public Day(Date date, int steps, int weight ) {
+    public Day(Date date, int steps, double weight ) {
         this.date = date;
         this.steps = steps;
         this.weight = weight;
@@ -21,7 +21,7 @@ public class Day
         return date;
     }
 
-    public int getStepS() {
+    public int getSteps() {
         return this.steps;
     }
 
