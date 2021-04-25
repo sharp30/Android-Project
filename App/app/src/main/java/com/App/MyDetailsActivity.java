@@ -49,7 +49,6 @@ public class MyDetailsActivity extends AppCompatActivity  {
                 float thumbPos =width - width * (seekBar.getProgress() / (float)seekBar.getMax());
 
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar)
             {

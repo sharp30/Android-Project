@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class Day
 {
-    protected Date date;
+    protected String date;
     protected int steps;
-    protected double weight;
+    protected float weight;
 
-    public Day(Date date, int steps, double weight ) {
+    public Day(String date, int steps, float weight ) {
         this.date = date;
         this.steps = steps;
         this.weight = weight;
@@ -16,7 +16,7 @@ public class Day
     }
 
     //getters
-    public Date getDate()
+    public String getDate()
     {
         return date;
     }
@@ -25,7 +25,7 @@ public class Day
         return this.steps;
     }
 
-    public double getWeight()
+    public float getWeight()
     {
         return this.weight;
     }
@@ -36,7 +36,7 @@ public class Day
         this.steps = stepsAmount;
     }
 
-    public void setWeight(double weight)
+    public void setWeight(float weight)
     {
         this.weight = weight;
     }

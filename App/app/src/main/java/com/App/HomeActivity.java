@@ -48,7 +48,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        sp = getSharedPreferences("steps",0);
+        sp = getSharedPreferences("values",0);
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED)
         {
 
@@ -101,8 +101,8 @@ public class HomeActivity extends Activity implements SensorEventListener {
         tvStepCount = findViewById(R.id.tvStepsAmount);
         pbStep = findViewById(R.id.progress_bar);
 
-        pbStep.setMax(sp.getInt("target",5000));        //other option - save just today - and others on sqldb
-         df = new SimpleDateFormat("dd/MM/yyyy");
+        pbStep.setMax(sp.getInt("steps_target",5000));        //other option - save just today - and others on sqldb
+        df = new SimpleDateFormat("dd/MM/yyyy");
 
         stepCount = 0;//sp.getInt(df.format(new Date()),0);
         updateProgressBar();
@@ -154,7 +154,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
     protected void saveCount()
     {
         SharedPreferences.Editor editor = sp.edit() ;
-        editor.putInt(df.format(new Date()),stepCount);
+        editor.putInt("steps",stepCount);
         editor.apply();
 
     }

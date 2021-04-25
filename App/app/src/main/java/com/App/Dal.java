@@ -19,21 +19,23 @@ public class Dal extends SQLiteAssetHelper {
 
 
 
-    public Day getDay(Date date)
+    public Day getDay(String date)
     {
         SQLiteDatabase db = getWritableDatabase();
-        String sql = String.format("Select * from DAYS where date = %s",date);
-        SQLiteStatement statement = db.compileStatement(sql);
+        String sql = String.format("Select * from DAYS where date = '%s'",date);
 
         int steps = 0;
-        double weight = 0;
+        float weight = 0;
 
         Cursor cursor = db.rawQuery(sql,null);
-        while(cursor.moveToNext())
-        {
-            steps = cursor.getInt(cursor.getColumnIndex("steps"));
-            weight = cursor.getDouble(cursor.getColumnIndex("weight"));
+        if(cursor.moveToFirst()) {
+                steps = cursor.getInt(cursor.getColumnIndex("steps"));
+                weight = cursor.getFloat(cursor.getColumnIndex("weight"));
         }
+        else
+            return new Day(date,50,0);
+
+
         return new Day(date,steps,weight);
     }
 

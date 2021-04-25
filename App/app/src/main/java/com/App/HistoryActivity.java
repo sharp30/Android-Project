@@ -1,5 +1,6 @@
 package com.App;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -11,11 +12,14 @@ import com.github.mikephil.charting.formatter.DefaultXAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.formatter.XAxisValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,16 +30,56 @@ import java.util.Random;
 
 public class HistoryActivity extends AppCompatActivity {
     SharedPreferences sp;
+    Dal dal;
+    BottomNavigationView bottomNavigationView;
+    boolean type = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+        dal = new Dal(getApplicationContext());
+        sp = getSharedPreferences("values",0);
+
+        bottomNavigationView = findViewById(R.id.btn_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent next = null;
+                switch (item.getItemId()) {
+                    case R.id.steps_nav:
+                        type = true;
+                        break;
+
+                    case R.id.weight_nav:
+                        type = false;
+                        break;
+                    default:
+                        return false;
+                      }
+                      buildChart(type);
+                      return true;
+            }});
 
 
-        sp = getSharedPreferences("steps",0);
+            buildChart(type);
 
-        int target = sp.getInt("target",5000);
+    }
+
+    private void buildChart(boolean type)
+    {
+        if(type)
+            getChart("steps");
+        else
+            getChart("weight");
+    }
+
+    public void getChart(String type)
+    {
+
+
+        int target = sp.getInt(type+"_target",5000);
 
         BarChart barChart = (BarChart) findViewById(R.id.bar_chart);
 
@@ -48,22 +92,33 @@ public class HistoryActivity extends AppCompatActivity {
         Random random = new Random();
         ArrayList<BarEntry> entries = new ArrayList<>();
         int[] colors = new int[5];
+
+        //today value
+        Date day = cal.getTime();
+        String date = df.format(day);
+        float val = sp.getInt(type,0);
+
         for(int i=0; i<5;i++)
         {
 
             // Get current date of calendar which point to the yesterday now
-            Date day = cal.getTime();
-
-            //read week history - from db/
-            String date =  df.format(day);
-            int val = sp.getInt(date,random.nextInt(10000));
             colors[i]= Color.RED;
             if(val>target)
                 colors[i] = Color.GREEN;
 
-            entries.add(new BarEntry(val, 4-i));
+            entries.add(new BarEntry(val, 5-i));
             labels.add(date);
             cal.add(Calendar.DATE, -1);
+            day = cal.getTime();
+
+            //read week history - from db/
+            date =  df.format(day);
+            if(type == "steps")
+                val = (int)dal.getDay(date).getSteps();
+            else
+                val = dal.getDay(date).getWeight();
+
+
         }
         BarDataSet bardataset = new BarDataSet(entries, "Cells");
         BarData data = new BarData(labels, bardataset);
@@ -109,11 +164,6 @@ public class HistoryActivity extends AppCompatActivity {
             public String getXValue(String original, int index, ViewPortHandler viewPortHandler) {
                 return labels.get(index);
             }
-
-
-
-
-
         });
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
