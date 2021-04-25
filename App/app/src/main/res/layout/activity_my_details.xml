@@ -16,14 +16,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
-        android:id="@+id/sbWeight"
+        android:id="@+id/sbTarget"
         android:layout_width="293dp"
         android:layout_height="111dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="188dp"
         app:layout_constraintEnd_toEndOf="@+id/sbHeight"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/sbHeight"
-        app:layout_constraintTop_toBottomOf="@+id/sbHeight" />
+        app:layout_constraintTop_toBottomOf="@+id/sbHeight"
+        android:max="10000"/>
 
     <Button
         android:id="@+id/btnUpdate"
@@ -33,9 +34,27 @@
         android:background="@drawable/roundedbutton"
         android:text="@string/update_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/sbWeight"
-        app:layout_constraintStart_toStartOf="@+id/sbWeight"
-        app:layout_constraintTop_toBottomOf="@+id/sbWeight"
+        app:layout_constraintEnd_toEndOf="@+id/sbTarget"
+        app:layout_constraintStart_toStartOf="@+id/sbTarget"
+        app:layout_constraintTop_toBottomOf="@+id/sbTarget"
         app:layout_constraintVertical_bias="0.686" />
+
+    <TextView
+        android:id="@+id/tvHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/sbHeight"
+        app:layout_constraintEnd_toEndOf="@+id/sbHeight"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/sbHeight" />
+
+    <TextView
+        android:id="@+id/tvTarget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/sbTarget"
+        app:layout_constraintEnd_toEndOf="@+id/sbTarget"
+        app:layout_constraintStart_toStartOf="@+id/sbTarget" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,9 +32,10 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        final int TARGET = 250;
 
         sp = getSharedPreferences("steps",0);
+
+        int target = sp.getInt("target",5000);
 
         BarChart barChart = (BarChart) findViewById(R.id.bar_chart);
 
@@ -55,9 +56,9 @@ public class HistoryActivity extends AppCompatActivity {
 
             //read week history - from db/
             String date =  df.format(day);
-            int val = sp.getInt(date,random.nextInt(1000));
+            int val = sp.getInt(date,random.nextInt(10000));
             colors[i]= Color.RED;
-            if(val>TARGET)
+            if(val>target)
                 colors[i] = Color.GREEN;
 
             entries.add(new BarEntry(val, 4-i));

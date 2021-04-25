@@ -43,16 +43,18 @@ public class HomeActivity extends Activity implements SensorEventListener {
     DateFormat df;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        sp = getSharedPreferences("steps",0);
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED)
         {
+
             //ask for permission
             requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
         }
-        sp = getSharedPreferences("steps",0);
         bottomNavigationView = findViewById(R.id.btn_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -99,12 +101,11 @@ public class HomeActivity extends Activity implements SensorEventListener {
         tvStepCount = findViewById(R.id.tvStepsAmount);
         pbStep = findViewById(R.id.progress_bar);
 
-        //other option - save just today - and others on sqldb
+        pbStep.setMax(sp.getInt("target",5000));        //other option - save just today - and others on sqldb
          df = new SimpleDateFormat("dd/MM/yyyy");
 
         stepCount = 0;//sp.getInt(df.format(new Date()),0);
-        pbStep.setProgress(stepCount);
-        tvStepCount.setText(String.valueOf(stepCount));
+        updateProgressBar();
 
 
 
@@ -118,8 +119,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
 
             stepCount++;
             //stepCount = (int) sensorEvent.values[0];
-            pbStep.setProgress(stepCount);
-            tvStepCount.setText(String.valueOf(stepCount));
+           updateProgressBar();
         }
     }
 
@@ -137,9 +137,9 @@ public class HomeActivity extends Activity implements SensorEventListener {
         if(stepCount == 0)
         {
             stepCount = sp.getInt(df.format(new Date()),0);
-            pbStep.setProgress(stepCount);
-            tvStepCount.setText(String.valueOf(stepCount));
         }
+        updateProgressBar();
+
 
     }
 
@@ -156,6 +156,12 @@ public class HomeActivity extends Activity implements SensorEventListener {
         SharedPreferences.Editor editor = sp.edit() ;
         editor.putInt(df.format(new Date()),stepCount);
         editor.apply();
+
+    }
+    protected void updateProgressBar()
+    {
+        pbStep.setProgress(stepCount);
+        tvStepCount.setText(String.valueOf(stepCount));
 
     }
 }
