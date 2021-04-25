@@ -17,4 +17,6 @@
     <string name="btn_explore">Explore!</string>
     <string name="btn_login">Login</string>
     <string name="register_btn">Register!</string>
+    <string name="title_activity_edit_weight">EditWeightActivity</string>
+    <string name="btnUpdate">Update!</string>
 </resources>

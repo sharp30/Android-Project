@@ -62,7 +62,6 @@ public class HistoryActivity extends AppCompatActivity {
                       return true;
             }});
 
-
             buildChart(type);
 
     }
@@ -77,8 +76,6 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void getChart(String type)
     {
-
-
         int target = sp.getInt(type+"_target",5000);
 
         BarChart barChart = (BarChart) findViewById(R.id.bar_chart);
@@ -117,8 +114,6 @@ public class HistoryActivity extends AppCompatActivity {
                 val = (int)dal.getDay(date).getSteps();
             else
                 val = dal.getDay(date).getWeight();
-
-
         }
         BarDataSet bardataset = new BarDataSet(entries, "Cells");
         BarData data = new BarData(labels, bardataset);

@@ -10,4 +10,9 @@
             android:id= "@+id/profile_nav"
             android:icon  = "@drawable/ic_account_circle_24"
             android:title = "Edit Data" />
+    <item
+        android:id="@+id/weight_nav"
+        android:icon  = "@drawable/ic_weight"
+        android:title="Edit Weight" />
+
     </menu>

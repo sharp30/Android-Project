@@ -70,6 +70,10 @@ public class HomeActivity extends Activity implements SensorEventListener {
                         next = new Intent(getApplicationContext(),MyDetailsActivity.class);
                         startActivity(next);
                         break;
+                    case R.id.weight_nav:
+                        next = new Intent(getApplicationContext(),EditWeightActivity.class);
+                        startActivity(next);
+                        break;
                     default:
                         return false;
                 }
