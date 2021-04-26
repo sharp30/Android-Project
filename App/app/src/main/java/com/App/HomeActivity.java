@@ -6,6 +6,10 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -25,6 +29,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -41,6 +46,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
     BottomNavigationView bottomNavigationView;
     SharedPreferences sp;
     DateFormat df;
+    Dal dal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -49,6 +55,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
         setContentView(R.layout.activity_home);
 
         sp = getSharedPreferences("values",0);
+        dal = new Dal(getApplicationContext());
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED)
         {
 
@@ -113,7 +120,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
 
 
 
-
+        createAlarm();
 
     }
 
@@ -168,4 +175,30 @@ public class HomeActivity extends Activity implements SensorEventListener {
         tvStepCount.setText(String.valueOf(stepCount));
 
     }
+
+    public void createAlarm() {
+        //System request code
+        int DATA_FETCHER_RC = 123;
+        //Create an alarm manager
+        AlarmManager mAlarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+        //Create the time of day you would like it to go off. Use a calendar
+        //just before midnight
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 58);
+
+        //Create an intent that points to the receiver. The system will notify the app about the current time, and send a broadcast to the app
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, DATA_FETCHER_RC,intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        //initialize the alarm by using inexactrepeating. This allows the system to scheduler your alarm at the most efficient time around your
+        //set time, it is usually a few seconds off your requested time.
+        // you can also use setExact however this is not recommended. Use this only if it must be done then.
+
+        //Also set the interval using the AlarmManager constants
+        mAlarmManager.setInexactRepeating(AlarmManager.RTC,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
+
+    }
+
 }
