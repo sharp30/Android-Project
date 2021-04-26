@@ -93,17 +93,24 @@ public class HistoryActivity extends AppCompatActivity {
         //today value
         Date day = cal.getTime();
         String date = df.format(day);
-        float val = sp.getInt(type,0);
+        float val;
+
+        if(type == "steps")
+             val = sp.getInt(type,0);
+        else
+            val = sp.getFloat(type,0);
 
         for(int i=0; i<5;i++)
+
         {
 
             // Get current date of calendar which point to the yesterday now
             colors[i]= Color.RED;
-            if(val>target)
+            if (type == "steps" && val > target || type == "weight" && val <= target)
                 colors[i] = Color.GREEN;
 
-            entries.add(new BarEntry(val, 5-i));
+
+            entries.add(new BarEntry(val, 4-i));
             labels.add(date);
             cal.add(Calendar.DATE, -1);
             day = cal.getTime();
