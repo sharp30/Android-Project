@@ -30,7 +30,7 @@ public class EditWeightActivity extends AppCompatActivity {
         sp = this.getSharedPreferences("values",0);
 
         //find views
-        seekBar = findViewById(R.id.sbWeight);
+        seekBar = findViewById(R.id.sbSteps);
         editText = findViewById(R.id.edWeight);
 
         btnUpdate = findViewById(R.id.btnUpdate);

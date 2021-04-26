@@ -7,24 +7,25 @@
     tools:context=".MyDetailsActivity">
 
     <SeekBar
-        android:id="@+id/sbHeight"
+        android:id="@+id/sbSteps"
         android:layout_width="293dp"
         android:layout_height="111dp"
         android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:max="10000"/>
 
     <SeekBar
-        android:id="@+id/sbTarget"
+        android:id="@+id/sbWeight"
         android:layout_width="293dp"
         android:layout_height="111dp"
         android:layout_marginTop="188dp"
-        app:layout_constraintEnd_toEndOf="@+id/sbHeight"
+        app:layout_constraintEnd_toEndOf="@+id/sbSteps"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/sbHeight"
-        app:layout_constraintTop_toBottomOf="@+id/sbHeight"
-        android:max="10000"/>
+        app:layout_constraintStart_toStartOf="@+id/sbSteps"
+        app:layout_constraintTop_toBottomOf="@+id/sbSteps"
+        android:max="100"/>
 
     <Button
         android:id="@+id/btnUpdate"
@@ -34,27 +35,58 @@
         android:background="@drawable/roundedbutton"
         android:text="@string/update_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/sbTarget"
-        app:layout_constraintStart_toStartOf="@+id/sbTarget"
-        app:layout_constraintTop_toBottomOf="@+id/sbTarget"
+        app:layout_constraintEnd_toEndOf="@+id/sbWeight"
+        app:layout_constraintStart_toStartOf="@+id/sbWeight"
+        app:layout_constraintTop_toBottomOf="@+id/sbWeight"
         app:layout_constraintVertical_bias="0.686" />
 
     <TextView
-        android:id="@+id/tvHeight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/tvSteps"
+        android:layout_width="87dp"
+        android:layout_height="37dp"
         android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/sbHeight"
-        app:layout_constraintEnd_toEndOf="@+id/sbHeight"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="@+id/sbHeight" />
+        android:text="@string/steps_target"
+        app:layout_constraintBottom_toTopOf="@+id/sbSteps"
+        app:layout_constraintEnd_toEndOf="@+id/sbSteps"
+        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintStart_toStartOf="@+id/sbSteps" />
 
     <TextView
-        android:id="@+id/tvTarget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/sbTarget"
-        app:layout_constraintEnd_toEndOf="@+id/sbTarget"
-        app:layout_constraintStart_toStartOf="@+id/sbTarget" />
+        android:id="@+id/tvWeight"
+        android:layout_width="88dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/weight_target"
+        app:layout_constraintBottom_toTopOf="@+id/sbWeight"
+        app:layout_constraintEnd_toEndOf="@+id/sbWeight"
+        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintStart_toStartOf="@+id/sbWeight" />
+
+    <EditText
+        android:id="@+id/edSteps"
+        android:layout_width="80dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSteps"
+        app:layout_constraintEnd_toEndOf="@+id/sbSteps"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toEndOf="@+id/tvSteps"
+        app:layout_constraintTop_toTopOf="@+id/tvSteps"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/edWeight"
+        android:layout_width="80dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="20dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/tvWeight"
+        app:layout_constraintEnd_toEndOf="@+id/sbWeight"
+        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintStart_toEndOf="@+id/tvWeight"
+        app:layout_constraintTop_toTopOf="@+id/tvWeight"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

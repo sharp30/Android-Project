@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <SeekBar
-        android:id="@+id/sbWeight"
+        android:id="@+id/sbSteps"
         android:layout_width="239dp"
         android:layout_height="52dp"
         android:layout_marginTop="108dp"
@@ -19,9 +19,9 @@
         android:layout_width="78dp"
         android:layout_height="40dp"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/sbWeight"
-        app:layout_constraintEnd_toEndOf="@+id/sbWeight"
-        app:layout_constraintStart_toStartOf="@+id/sbWeight" />
+        app:layout_constraintBottom_toTopOf="@+id/sbSteps"
+        app:layout_constraintEnd_toEndOf="@+id/sbSteps"
+        app:layout_constraintStart_toStartOf="@+id/sbSteps" />
 
     <Button
         android:id="@+id/btnUpdate"
@@ -29,9 +29,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="280dp"
         android:text="@string/btnUpdate"
-        app:layout_constraintEnd_toEndOf="@+id/sbWeight"
+        app:layout_constraintEnd_toEndOf="@+id/sbSteps"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/sbWeight"
-        app:layout_constraintTop_toBottomOf="@+id/sbWeight" />
+        app:layout_constraintStart_toStartOf="@+id/sbSteps"
+        app:layout_constraintTop_toBottomOf="@+id/sbSteps" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

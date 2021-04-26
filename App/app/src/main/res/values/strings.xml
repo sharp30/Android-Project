@@ -19,4 +19,6 @@
     <string name="register_btn">Register!</string>
     <string name="title_activity_edit_weight">EditWeightActivity</string>
     <string name="btnUpdate">Update!</string>
+    <string name="steps_target">Steps Target</string>
+    <string name="weight_target">Weight Target</string>
 </resources>

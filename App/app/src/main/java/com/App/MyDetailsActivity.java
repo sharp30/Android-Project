@@ -5,16 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class MyDetailsActivity extends AppCompatActivity  {
 
-    SeekBar height;
-    SeekBar target;
+    SeekBar steps;
+    SeekBar weight;
     SharedPreferences sp;
-    TextView tvHeight;
-    TextView tvTarget;
+    TextView tvWeight;
+    TextView tvSteps;
+    EditText edSteps;
+    EditText edWeight;
     //SeekBar weight;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,46 +29,97 @@ public class MyDetailsActivity extends AppCompatActivity  {
 
         sp = this.getSharedPreferences("values", Context.MODE_PRIVATE);
 
-        target =(SeekBar)findViewById(R.id.sbTarget);
+        weight =(SeekBar)findViewById(R.id.sbWeight);
+        steps =(SeekBar)findViewById(R.id.sbSteps);
 
-        tvTarget = (TextView)findViewById(R.id.tvTarget);
-        tvHeight = (TextView)findViewById(R.id.tvHeight);
+        tvWeight = (TextView)findViewById(R.id.tvWeight);
+        tvSteps = (TextView)findViewById(R.id.tvSteps);
 
+        edWeight = (EditText)findViewById(R.id.edWeight);
+        edSteps = (EditText)findViewById(R.id.edSteps);
         //inital values
-        target.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        weight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b)
             {
-                tvTarget.setText(Integer.toString(i));
+                edWeight.setText(Integer.toString(i));
 
 
                 SharedPreferences.Editor editor = sp.edit();
-                editor.putInt("target",i);
+                editor.putInt("weight_target",i);
                 editor.commit();
-
-                //move textView
-                int width = seekBar.getWidth()
-                        - seekBar.getPaddingLeft()
-                        - seekBar.getPaddingRight();
-
-                float thumbPos =width - width * (seekBar.getProgress() / (float)seekBar.getMax());
-
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar)
             {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+        steps.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b)
+            {
+                edSteps.setText(Integer.toString(i));
+
+
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putInt("steps_target",i);
+                editor.commit();
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar)
+            {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        edWeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+                //check if int
+                weight.setProgress(Integer.parseInt(editable.toString()));
             }
         });
 
-        target.setProgress(sp.getInt("target",5000));
+        edSteps.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        height = (SeekBar)findViewById(R.id.sbHeight);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+                //check if int
+                steps.setProgress(Integer.parseInt(editable.toString()));
+            }
+        });
+
+
+
+        steps.setProgress(sp.getInt("steps_target",5000));
+        weight.setProgress((int)sp.getInt("weight_target",50));
+        //height = (SeekBar)findViewById(R.id.sbSteps);
         //weight =(SeekBar)findViewById(R.id.sbWeight);
     }
 }
