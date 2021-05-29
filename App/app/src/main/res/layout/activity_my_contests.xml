@@ -9,23 +9,23 @@
     <ListView
         android:id="@+id/list"
         android:layout_width="352dp"
-        android:layout_height="196dp"
+        android:layout_height="581dp"
         android:layout_marginBottom="96dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_create_contest"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_create_contest"
+        app:layout_constraintStart_toStartOf="@+id/btn_create_contest"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52"/>
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btn_create_contest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
         android:text="@string/create_contest"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,13 +30,13 @@ public class ContestsAdapter extends ArrayAdapter<Contest>
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
         TextView tvName = (TextView)view.findViewById(R.id.tvName);
-        TextView tvDate = (TextView)view.findViewById(R.id.tvDate);
+        TextView tvDate = (TextView)view.findViewById(R.id.etDate);
         TextView tvPlayersNum =  (TextView)view.findViewById(R.id.tvAmount);
 
         Contest temp = contests.get(position);
 
         tvName.setText(temp.getName());
-        tvDate.setText(dateFormat.format(temp.getDate()));
+        tvDate.setText(temp.getStartDate());
         tvPlayersNum.setText(String.valueOf(temp.getPlayersAmount()));
 
         return view;

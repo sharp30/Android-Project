@@ -1,7 +1,9 @@
 package com.App.Contests;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -9,25 +11,68 @@ import android.widget.ListView;
 import com.App.Contest;
 import com.App.ContestsAdapter;
 import com.App.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ExploreContestsActivity extends AppCompatActivity {
-
+    ListView listView;
+    ArrayList<Contest> contests;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore_contests);
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
-        ListView listView = findViewById(R.id.list);
+        listView = findViewById(R.id.list);
+        contests = new ArrayList<Contest>();
+        final SharedPreferences sp = getSharedPreferences("values",0);
 
-        ArrayList<Contest> contests = new ArrayList<Contest>();
-        contests.add(new Contest("first",new Date(),10));
-        contests.add(new Contest("second", new Date(),5));
-        contests.add(new Contest("third", new Date(),4));
 
+        Query q = ref.child("contests");
+        q.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+                Date today = Calendar.getInstance().getTime();
+                DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String name = sp.getString("logged","");
+
+                contests.clear();
+                for(DataSnapshot child : snapshot.getChildren())
+                {
+                    
+                    Contest contest =new Contest((Map<String,Object>)child.getValue());
+                    if(contest.isJoinable(today,name))
+                    {
+                        contests.add(contest);
+                    }
+                }
+                refresh();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        ContestsAdapter adapter = new ContestsAdapter(this,0,0,contests);
+        listView.setAdapter(adapter);
+    }
+
+    private void refresh()
+    {
         ContestsAdapter adapter = new ContestsAdapter(this,0,0,contests);
         listView.setAdapter(adapter);
     }

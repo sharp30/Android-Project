@@ -37,7 +37,6 @@ public class EditWeightActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        float a = 0;
         setContentView(R.layout.activity_edit_weight);
 
         sp = this.getSharedPreferences("values",0);

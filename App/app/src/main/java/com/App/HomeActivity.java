@@ -204,5 +204,8 @@ public class HomeActivity extends Activity implements SensorEventListener {
         mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
 
     }
+    public void onBackPressed()
+    {
+    }
 
 }
