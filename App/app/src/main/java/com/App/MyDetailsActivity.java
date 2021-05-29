@@ -3,6 +3,7 @@ package com.App;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -63,7 +64,6 @@ public class MyDetailsActivity extends AppCompatActivity  {
             {
                 edSteps.setText(Integer.toString(i));
 
-
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putInt("steps_target",i);
                 editor.commit();
@@ -79,15 +79,15 @@ public class MyDetailsActivity extends AppCompatActivity  {
 
         edWeight.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
 
             }
-
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
 
             }
-
             @Override
             public void afterTextChanged(Editable editable)
             {
@@ -122,4 +122,12 @@ public class MyDetailsActivity extends AppCompatActivity  {
         //height = (SeekBar)findViewById(R.id.sbSteps);
         //weight =(SeekBar)findViewById(R.id.sbWeight);
     }
+    @Override
+    public void onBackPressed()
+    {
+        Intent i = new Intent(this,HomeActivity.class);
+        startActivity(i);
+
+    }
+
 }

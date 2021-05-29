@@ -21,13 +21,14 @@
         <activity android:name=".Contests.ExploreContestsActivity" />
         <activity android:name=".Contests.MyContestsActivity" />
         <activity android:name=".LoginActivity">
+        </activity>
+        <activity android:name=".CreateAccountActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateAccountActivity"></activity>
         <activity android:name=".ContestsActivity" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".MyDetailsActivity" />

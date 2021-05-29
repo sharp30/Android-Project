@@ -29,10 +29,9 @@
         android:contentDescription="@string/history_results_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/progress_bar"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/progress_bar"
         app:layout_constraintTop_toBottomOf="@+id/tvStepsAmount"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.525"
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -51,13 +50,14 @@
 
     <TextView
         android:id="@+id/tvStepsAmount"
-        android:layout_width="88dp"
-        android:layout_height="59dp"
+        android:layout_width="69dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="308dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/progress_bar"
-        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="@+id/progress_bar"
         app:layout_constraintTop_toBottomOf="@+id/progress_bar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.47" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

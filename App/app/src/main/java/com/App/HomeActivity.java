@@ -115,7 +115,9 @@ public class HomeActivity extends Activity implements SensorEventListener {
         pbStep.setMax(sp.getInt("steps_target",5000));        //other option - save just today - and others on sqldb
         df = new SimpleDateFormat("dd/MM/yyyy");
 
-        stepCount = 0;//sp.getInt(df.format(new Date()),0);
+
+
+        stepCount = sp.getInt("steps",0);
         updateProgressBar();
 
 
@@ -129,7 +131,6 @@ public class HomeActivity extends Activity implements SensorEventListener {
         if (sensorEvent.sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
 
             stepCount++;
-            //stepCount = (int) sensorEvent.values[0];
            updateProgressBar();
         }
     }
@@ -143,11 +144,13 @@ public class HomeActivity extends Activity implements SensorEventListener {
     //when activity is finally active
     protected void onResume() {
         super.onResume();
-        if (stepCounter != null)
-            sensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_FASTEST);
+        //if (stepCounter != null)
+        sensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_FASTEST);
+        stepCounter = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+
         if(stepCount == 0)
         {
-            stepCount = sp.getInt(df.format(new Date()),0);
+            stepCount = sp.getInt("steps",0);
         }
         updateProgressBar();
 
@@ -157,10 +160,12 @@ public class HomeActivity extends Activity implements SensorEventListener {
     @Override
     protected void onStop() {
         super.onStop();
+
         if (stepCounter != null) {
             sensorManager.unregisterListener(this, stepCounter);
-            stepCounter = null;
+            //stepCounter = null;
         }
+        saveCount();
     }
     protected void saveCount()
     {
@@ -173,7 +178,6 @@ public class HomeActivity extends Activity implements SensorEventListener {
     {
         pbStep.setProgress(stepCount);
         tvStepCount.setText(String.valueOf(stepCount));
-
     }
 
     public void createAlarm() {
@@ -185,19 +189,19 @@ public class HomeActivity extends Activity implements SensorEventListener {
         //Create the time of day you would like it to go off. Use a calendar
         //just before midnight
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 58);
+        calendar.set(Calendar.HOUR_OF_DAY, 18);
+        calendar.set(Calendar.MINUTE,14);
 
         //Create an intent that points to the receiver. The system will notify the app about the current time, and send a broadcast to the app
         Intent intent = new Intent(this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, DATA_FETCHER_RC,intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        //initialize the alarm by using inexactrepeating. This allows the system to scheduler your alarm at the most efficient time around your
         //set time, it is usually a few seconds off your requested time.
+        //initialize the alarm by using inexactrepeating. This allows the system to scheduler your alarm at the most efficient time around your
         // you can also use setExact however this is not recommended. Use this only if it must be done then.
 
         //Also set the interval using the AlarmManager constants
-        mAlarmManager.setInexactRepeating(AlarmManager.RTC,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
+        mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
 
     }
 

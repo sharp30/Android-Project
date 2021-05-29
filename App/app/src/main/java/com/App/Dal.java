@@ -12,8 +12,8 @@ import java.util.Date;
 
 public class Dal extends SQLiteAssetHelper {
 
-    public Dal(Context context) {
-
+    public Dal(Context context)
+    {
         super(context, "my_db.db", null, 1);
     }
 
@@ -39,8 +39,24 @@ public class Dal extends SQLiteAssetHelper {
         return new Day(date,steps,weight);
     }
 
+    public int getStepsOfDay(String date)
+    {
+        return getDay(date).steps;
+    }
+
+    public void setStepsOfDay(String date, int steps)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        String sql = String.format("UPDATE Days SET steps = %d WHERE date = %s",steps,date);
+        SQLiteStatement statement = db.compileStatement(sql);
+
+        statement.execute();
+
+    }
+
     public void addDay(Day day)
     {
+        int i = 0;
         SQLiteDatabase db = getWritableDatabase();
         String sql = String.format("INSERT INTO Days (date,steps,weight) (%s,%d,%f)",day.getDate(),day.getSteps(),day.getWeight());
         SQLiteStatement statement = db.compileStatement(sql);

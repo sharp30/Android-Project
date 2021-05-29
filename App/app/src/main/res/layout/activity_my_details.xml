@@ -44,33 +44,32 @@
         android:id="@+id/tvSteps"
         android:layout_width="87dp"
         android:layout_height="37dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/steps_target"
         app:layout_constraintBottom_toTopOf="@+id/sbSteps"
-        app:layout_constraintEnd_toEndOf="@+id/sbSteps"
-        app:layout_constraintHorizontal_bias="0.174"
         app:layout_constraintStart_toStartOf="@+id/sbSteps" />
 
     <TextView
         android:id="@+id/tvWeight"
-        android:layout_width="88dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="100dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/weight_target"
         app:layout_constraintBottom_toTopOf="@+id/sbWeight"
-        app:layout_constraintEnd_toEndOf="@+id/sbWeight"
-        app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintStart_toStartOf="@+id/sbWeight" />
 
     <EditText
         android:id="@+id/edSteps"
         android:layout_width="80dp"
         android:layout_height="42dp"
+        android:layout_marginStart="20dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/tvSteps"
         app:layout_constraintEnd_toEndOf="@+id/sbSteps"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.367"
         app:layout_constraintStart_toEndOf="@+id/tvSteps"
         app:layout_constraintTop_toTopOf="@+id/tvSteps"
         app:layout_constraintVertical_bias="1.0" />
@@ -84,7 +83,7 @@
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/tvWeight"
         app:layout_constraintEnd_toEndOf="@+id/sbWeight"
-        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toEndOf="@+id/tvWeight"
         app:layout_constraintTop_toTopOf="@+id/tvWeight"
         app:layout_constraintVertical_bias="0.0" />

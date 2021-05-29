@@ -13,6 +13,12 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.formatter.XAxisValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 
 import android.content.Intent;
@@ -33,8 +39,11 @@ public class HistoryActivity extends AppCompatActivity {
     Dal dal;
     BottomNavigationView bottomNavigationView;
     boolean type = true;
+    final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    ArrayList<String> labels;
 
-
+    ArrayList<BarEntry> entries;
+    ArrayList<Integer> colors;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,108 +77,141 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void buildChart(boolean type)
     {
+        labels = new ArrayList<String>();
+        entries = new ArrayList<>();
+        colors = new ArrayList<>();
+
         if(type)
             getChart("steps");
         else
             getChart("weight");
     }
 
-    public void getChart(String type)
+    public void getChart(final String type)
     {
-        int target = sp.getInt(type+"_target",5000);
-
-        BarChart barChart = (BarChart) findViewById(R.id.bar_chart);
-
-        final ArrayList<String> labels = new ArrayList<String>();
-
-        Calendar cal = Calendar.getInstance();
-
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        final int target = sp.getInt(type+"_target",5000);
+        final BarChart barChart = (BarChart) findViewById(R.id.bar_chart);
+        final Calendar cal = Calendar.getInstance();
+        final DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
         Random random = new Random();
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        int[] colors = new int[5];
-
         //today value
         Date day = cal.getTime();
         String date = df.format(day);
         float val;
 
         if(type == "steps")
-             val = sp.getInt(type,0);
+            val = sp.getInt(type,0);
         else
             val = sp.getFloat(type,0);
 
-        for(int i=0; i<5;i++)
+        addEntry(val,type,target,0,date);
 
+        final String[] dates = new String[4];
+        for(int i =0; i < 4; i++)
         {
-
-            // Get current date of calendar which point to the yesterday now
-            colors[i]= Color.RED;
-            if (type == "steps" && val > target || type == "weight" && val <= target)
-                colors[i] = Color.GREEN;
-
-
-            entries.add(new BarEntry(val, 4-i));
-            labels.add(date);
             cal.add(Calendar.DATE, -1);
             day = cal.getTime();
 
-            //read week history - from db/
-            date =  df.format(day);
-            if(type == "steps")
-                val = (int)dal.getDay(date).getSteps();
-            else
-                val = dal.getDay(date).getWeight();
+            dates[i] = df.format(day);
+
         }
-        BarDataSet bardataset = new BarDataSet(entries, "Cells");
-        BarData data = new BarData(labels, bardataset);
 
-        barChart.setData(data);
+        Query q = ref.child("users").child(sp.getString("logged","")+"/history");
+        q.addListenerForSingleValueEvent(new ValueEventListener() {
 
-        bardataset.setColors(colors);
-        barChart.animateY(5000);
-
-
-        //----design----
-        //delete
-        barChart.getLegend().setEnabled(false);
-
-        barChart.setDrawBorders(false);
-        barChart.setDrawGridBackground(false);
-
-        barChart.getAxisLeft().setDrawGridLines(false);
-        barChart.getAxisLeft().setDrawLabels(false);
-        barChart.getAxisLeft().setDrawAxisLine(false);
-
-        barChart.getXAxis().setDrawGridLines(false);
-        barChart.getXAxis().setDrawLabels(false);
-        barChart.getXAxis().setDrawAxisLine(false);
-
-        barChart.getAxisRight().setDrawGridLines(false);
-        barChart.getAxisRight().setDrawLabels(false);
-        barChart.getAxisRight().setDrawAxisLine(false);
-
-
-        barChart.getAxisLeft().setDrawGridLines(false);
-        barChart.getXAxis().setDrawGridLines(false);
-
-        barChart.getXAxis().setDrawLabels(false); // hide bottom label
-        barChart.getAxisLeft().setDrawLabels(false); // hide left label
-        barChart.getAxisRight().setDrawLabels(false); // hide right label
-
-        //font size
-        bardataset.setValueTextSize(25);
-        barChart.getXAxis().setValueFormatter(new XAxisValueFormatter()
-        {
             @Override
-            public String getXValue(String original, int index, ViewPortHandler viewPortHandler) {
-                return labels.get(index);
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+                for(int k = 0;k<dates.length;k++)
+                {
+                    float val = 0;
+                    try {
+                        val = ((Long)snapshot.child(dates[k].replaceAll("/","")).child(type).getValue()).floatValue();
+                    }
+                    catch (Exception e)
+                    {
+                        val = 0;
+                    }
+
+                    addEntry(val,type,target,k+1,dates[k]);
+
+
+                }
+                BarDataSet bardataset = new BarDataSet(entries, "Cells");
+                BarData data = new BarData(labels, bardataset);
+
+                barChart.setData(data);
+
+                bardataset.setColors(colors);
+                barChart.animateY(5000);
+
+
+                //----design----
+                //delete
+                barChart.getLegend().setEnabled(false);
+
+                barChart.setDrawBorders(false);
+                barChart.setDrawGridBackground(false);
+
+                barChart.getAxisLeft().setDrawGridLines(false);
+                barChart.getAxisLeft().setDrawLabels(false);
+                barChart.getAxisLeft().setDrawAxisLine(false);
+
+                barChart.getXAxis().setDrawGridLines(false);
+                barChart.getXAxis().setDrawLabels(false);
+                barChart.getXAxis().setDrawAxisLine(false);
+
+                barChart.getAxisRight().setDrawGridLines(false);
+                barChart.getAxisRight().setDrawLabels(false);
+                barChart.getAxisRight().setDrawAxisLine(false);
+
+
+                barChart.getAxisLeft().setDrawGridLines(false);
+                barChart.getXAxis().setDrawGridLines(false);
+
+                barChart.getXAxis().setDrawLabels(false); // hide bottom label
+                barChart.getAxisLeft().setDrawLabels(false); // hide left label
+                barChart.getAxisRight().setDrawLabels(false); // hide right label
+
+                //font size
+                bardataset.setValueTextSize(25);
+                barChart.getXAxis().setValueFormatter(new XAxisValueFormatter()
+                {
+                    @Override
+                    public String getXValue(String original, int index, ViewPortHandler viewPortHandler) {
+                        return labels.get(index);
+                    }
+                });
+                barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+                barChart.setNoDataTextDescription("");
+
+
+
             }
-        });
-        barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
 
 
-        barChart.setNoDataTextDescription("");
+
+
+
+
+    });
+
+    }
+
+    private void addEntry(float val, String type, int target,int i,String date)
+    {
+        if (type == "steps" && val > target || type == "weight" && val <= target)
+            colors.add(Color.GREEN);
+        else
+            colors.add(Color.RED);
+        entries.add(new BarEntry(val, 4-i));
+        labels.add(date);
+
     }
 }
