@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -85,12 +87,29 @@ public class MyContestsActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                Contest  selectedContest = contests.get(i);
+                Intent intent = new Intent(getApplicationContext(),ViewContestActivity.class);
+                intent.putExtra("contest_name",selectedContest.getName());
+
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void refresh()
     {
         ContestsAdapter adapter = new ContestsAdapter(this,0,0,contests);
         listView.setAdapter(adapter);
+
     }
 
 }

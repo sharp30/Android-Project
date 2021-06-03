@@ -138,7 +138,7 @@ public class CreateContestActivity extends AppCompatActivity {
                 Contest contest = new Contest(etContestName.getText().toString(),cal.getTime(),sbPlayersAmount.getProgress(),sp.getString("logged",""));
                 //TODO: check if values are valid
                 //TODO:check if name doesnt exist
-                ref.child("contests").push().setValue(contest);
+                ref.child("contests").child(contest.getName()).setValue(contest);
             }
         });
 

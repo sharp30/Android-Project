@@ -3,8 +3,11 @@ package com.App.Contests;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -23,6 +26,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ExploreContestsActivity extends AppCompatActivity {
@@ -69,6 +73,30 @@ public class ExploreContestsActivity extends AppCompatActivity {
 
         ContestsAdapter adapter = new ContestsAdapter(this,0,0,contests);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                Contest  selectedContest = contests.get(i);
+
+                SharedPreferences sp = getApplicationContext().getSharedPreferences("values",0);
+
+                final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+
+                selectedContest.players.add(sp.getString("logged",""));
+                ref.child("contests").child(selectedContest.getName()).child("players").setValue(selectedContest.players);
+
+                //after adding
+                Intent intent = new Intent(getApplicationContext(),ViewContestActivity.class);
+                intent.putExtra("contest_name",selectedContest.getName());
+
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void refresh()
