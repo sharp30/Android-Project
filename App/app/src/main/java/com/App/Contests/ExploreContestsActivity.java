@@ -49,7 +49,6 @@ public class ExploreContestsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {
                 Date today = Calendar.getInstance().getTime();
-                DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String name = sp.getString("logged","");
 
                 contests.clear();

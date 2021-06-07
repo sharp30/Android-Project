@@ -22,4 +22,6 @@ public class User {
         //stepsTarget = (long)5000;
         //history = Collections.singletonMap("1/1/2000" ,new Pair<Long,Long>((long)10,(long)5));
     }
+
+
 }

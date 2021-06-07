@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ContestsAdapter extends ArrayAdapter<Contest>
@@ -27,11 +25,10 @@ public class ContestsAdapter extends ArrayAdapter<Contest>
         LayoutInflater layoutInflater = ((Activity)context).getLayoutInflater();
 
         View view = layoutInflater.inflate(R.layout.contest_layout,parent,false);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
         TextView tvName = (TextView)view.findViewById(R.id.tvName);
         TextView tvDate = (TextView)view.findViewById(R.id.etDate);
-        TextView tvPlayersNum =  (TextView)view.findViewById(R.id.tvAmount);
+        TextView tvPlayersNum =  (TextView)view.findViewById(R.id.tvSteps);
 
         Contest temp = contests.get(position);
 

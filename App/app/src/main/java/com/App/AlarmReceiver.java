@@ -26,7 +26,7 @@ public class AlarmReceiver extends BroadcastReceiver
     {
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
-        DateFormat df =new SimpleDateFormat("ddMMyyyy");
+        DateFormat df =new SimpleDateFormat("yyyyMMdd");
         SharedPreferences sp = context.getSharedPreferences("values",0);
         String date = df.format(new Date());
         int steps = sp.getInt("steps",0);
