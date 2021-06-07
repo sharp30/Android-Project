@@ -93,6 +93,7 @@ public class HistoryActivity extends AppCompatActivity {
         final BarChart barChart = (BarChart) findViewById(R.id.bar_chart);
         final Calendar cal = Calendar.getInstance();
         final DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        final DateFormat fbForamt = new SimpleDateFormat("yyyyMMdd");
 
         Random random = new Random();
         //today value
@@ -126,8 +127,10 @@ public class HistoryActivity extends AppCompatActivity {
                 for(int k = 0;k<dates.length;k++)
                 {
                     float val = 0;
-                    try {
-                        val = ((Long)snapshot.child(dates[k].replaceAll("/","")).child(type).getValue()).floatValue();
+                    try
+                    {
+                        String fbDate = fbForamt.format(df.parse(dates[k]));
+                        val = ((Long)snapshot.child(fbDate).child(type).getValue()).floatValue();
                     }
                     catch (Exception e)
                     {

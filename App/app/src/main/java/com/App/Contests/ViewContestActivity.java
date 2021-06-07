@@ -67,7 +67,7 @@ public class ViewContestActivity extends AppCompatActivity {
                 tvEndDate.setText(contest.getEndDate());
 
                 //check if started
-                final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
                 final Calendar cal = Calendar.getInstance();
                 String today = sdf.format(cal.getTime());
@@ -89,7 +89,7 @@ public class ViewContestActivity extends AppCompatActivity {
 
 
                 final ArrayList<Date> days = new ArrayList<>();
-                while(!today.equals(sdf.format(cal.getTime())))
+                while(today.compareTo(sdf.format(cal.getTime())) >=0)
                 {
                     days.add(cal.getTime());
                     cal.add(Calendar.DATE,1);
@@ -98,7 +98,7 @@ public class ViewContestActivity extends AppCompatActivity {
                 for(final String name : contest.getPlayers())
                 {
                     //calculate all steps in this week
-                    Query q = ref.child(name).child("history").orderByKey().limitToFirst(days.size());
+                    Query q = ref.child("users").child(name).child("history").orderByKey().limitToFirst(days.size());
                     q.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -106,9 +106,10 @@ public class ViewContestActivity extends AppCompatActivity {
                             for(Date day :days)
                             {
                                 //int index = snapshot.indexOf(day);
+                                String a = sdf.format(day);
                                 if(snapshot.hasChild(sdf.format(day)))
                                 {
-                                    sum += (Integer)snapshot.child(sdf.format(day)).getValue();
+                                    sum += ((Long)snapshot.child(sdf.format(day)).child("steps").getValue()).intValue();
                                 }
                             }
                             players.put(name,sum);
