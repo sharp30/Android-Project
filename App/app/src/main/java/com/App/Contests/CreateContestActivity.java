@@ -23,13 +23,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CreateContestActivity extends AppCompatActivity {
+public class
+CreateContestActivity extends AppCompatActivity {
     Button btnCreate;
     EditText etContestName;
     EditText tvDate;
     SeekBar sbPlayersAmount;
     EditText etAmount;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,8 +143,6 @@ public class CreateContestActivity extends AppCompatActivity {
         });
 
         sbPlayersAmount.setProgress(1);
-
-
 
     }
 }

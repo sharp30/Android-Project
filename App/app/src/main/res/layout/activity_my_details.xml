@@ -41,7 +41,7 @@
         app:layout_constraintVertical_bias="0.686" />
 
     <TextView
-        android:id="@+id/tvSteps"
+        android:id="@+id/tvScore"
         android:layout_width="87dp"
         android:layout_height="37dp"
         android:layout_marginStart="8dp"
@@ -67,11 +67,11 @@
         android:layout_marginStart="20dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/tvSteps"
+        app:layout_constraintBottom_toBottomOf="@+id/tvScore"
         app:layout_constraintEnd_toEndOf="@+id/sbSteps"
         app:layout_constraintHorizontal_bias="0.367"
-        app:layout_constraintStart_toEndOf="@+id/tvSteps"
-        app:layout_constraintTop_toTopOf="@+id/tvSteps"
+        app:layout_constraintStart_toEndOf="@+id/tvScore"
+        app:layout_constraintTop_toTopOf="@+id/tvScore"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText

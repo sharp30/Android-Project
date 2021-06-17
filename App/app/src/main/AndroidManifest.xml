@@ -24,15 +24,7 @@
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
-        <activity
-            android:name=".Contests.ViewContestActivity"
-            android:label="@string/title_activity_view_contest">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Contests.ViewContestActivity"></activity>
         <activity android:name=".EditWeightActivity" />
         <activity android:name=".Contests.LeaderBoardActivity" />
         <activity android:name=".Contests.CreateContestActivity" />

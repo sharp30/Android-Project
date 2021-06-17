@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import androidx.core.util.Pair;
-
 import java.util.List;
 
 public class PlayersAdapter extends ArrayAdapter<UserHistory>
@@ -25,12 +23,14 @@ public class PlayersAdapter extends ArrayAdapter<UserHistory>
 
     public View getView(int position, View cellView, ViewGroup parent)
     {
+        //TODO: fix design
+
         LayoutInflater layoutInflater = ((Activity)context).getLayoutInflater();
 
         View view = layoutInflater.inflate(R.layout.player_layout,parent,false);
 
         TextView tvName = (TextView)view.findViewById(R.id.tvName);
-        TextView tvSteps = (TextView)view.findViewById(R.id.tvSteps);
+        TextView tvSteps = (TextView)view.findViewById(R.id.tvScore);
 
         tvName.setText(players.get(position).getName());
         tvSteps.setText(String.valueOf(players.get(position).getStepsAmount()));

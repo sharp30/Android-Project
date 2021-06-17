@@ -27,7 +27,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     SharedPreferences prefs;
     //DatabaseReference ref;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -49,8 +50,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                //todo: check if account details is good
-                //todo: register the user to database
+                //TODO: get user height
 
                 Query q = ref.child("users").child(etUsername.getText().toString());//.orderByChild("username").equalTo(etUsername.getText().toString())
                 q.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -63,7 +63,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            ref.child("users").child(etUsername.getText().toString()).child("height").setValue(70);
+                            User u = new User(etUsername.getText().toString(),70);
+                            ref.child("users").child(etUsername.getText().toString()).setValue(u.toMap());
                             //FireBaseHelper.addUser(new User(etUsername.getText().toString(),100));
                             SharedPreferences.Editor editor = prefs.edit();
                             editor.putString("logged",etUsername.getText().toString());

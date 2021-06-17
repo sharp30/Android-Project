@@ -34,7 +34,7 @@ public class MyDetailsActivity extends AppCompatActivity  {
         steps =(SeekBar)findViewById(R.id.sbSteps);
 
         tvWeight = (TextView)findViewById(R.id.tvWeight);
-        tvSteps = (TextView)findViewById(R.id.tvSteps);
+        tvSteps = (TextView)findViewById(R.id.tvScore);
 
         edWeight = (EditText)findViewById(R.id.edWeight);
         edSteps = (EditText)findViewById(R.id.edSteps);

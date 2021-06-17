@@ -45,7 +45,10 @@ public class HistoryActivity extends AppCompatActivity {
     ArrayList<BarEntry> entries;
     ArrayList<Integer> colors;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        //TODO: handle float issue
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         dal = new Dal(getApplicationContext());
