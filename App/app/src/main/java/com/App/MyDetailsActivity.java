@@ -31,7 +31,7 @@ public class MyDetailsActivity extends AppCompatActivity  {
         sp = this.getSharedPreferences("values", Context.MODE_PRIVATE);
 
         weight =(SeekBar)findViewById(R.id.sbWeight);
-        steps =(SeekBar)findViewById(R.id.sbSteps);
+        steps =(SeekBar)findViewById(R.id.sbHeight);
 
         tvWeight = (TextView)findViewById(R.id.tvWeight);
         tvSteps = (TextView)findViewById(R.id.tvScore);
@@ -114,13 +114,8 @@ public class MyDetailsActivity extends AppCompatActivity  {
                 steps.setProgress(Integer.parseInt(editable.toString()));
             }
         });
-
-
-
         steps.setProgress(sp.getInt("steps_target",5000));
         weight.setProgress((int)sp.getInt("weight_target",50));
-        //height = (SeekBar)findViewById(R.id.sbSteps);
-        //weight =(SeekBar)findViewById(R.id.sbWeight);
     }
     @Override
     public void onBackPressed()

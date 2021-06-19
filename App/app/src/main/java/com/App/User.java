@@ -12,10 +12,6 @@ public class User {
 
     public Integer score;
 
-    //public Long weightTarget;
-    //public Long stepsTarget;
-    //protected Day[] history;
-
 
     User(String username, float height) {
         this.username = username;

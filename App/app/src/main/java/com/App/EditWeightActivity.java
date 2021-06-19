@@ -1,10 +1,7 @@
 package com.App;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.content.SharedPreferences;
 
-import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -14,15 +11,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class EditWeightActivity extends AppCompatActivity {
 
@@ -42,7 +30,7 @@ public class EditWeightActivity extends AppCompatActivity {
         sp = this.getSharedPreferences("values",0);
 
         //find views
-        seekBar = findViewById(R.id.sbSteps);
+        seekBar = findViewById(R.id.sbHeight);
         editText = findViewById(R.id.edWeight);
 
         btnUpdate = findViewById(R.id.btnUpdate);

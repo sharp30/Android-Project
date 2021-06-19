@@ -7,7 +7,7 @@
     tools:context=".MyDetailsActivity">
 
     <SeekBar
-        android:id="@+id/sbSteps"
+        android:id="@+id/sbHeight"
         android:layout_width="293dp"
         android:layout_height="111dp"
         android:layout_marginTop="80dp"
@@ -21,10 +21,10 @@
         android:layout_width="293dp"
         android:layout_height="111dp"
         android:layout_marginTop="188dp"
-        app:layout_constraintEnd_toEndOf="@+id/sbSteps"
+        app:layout_constraintEnd_toEndOf="@+id/sbHeight"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/sbSteps"
-        app:layout_constraintTop_toBottomOf="@+id/sbSteps"
+        app:layout_constraintStart_toStartOf="@+id/sbHeight"
+        app:layout_constraintTop_toBottomOf="@+id/sbHeight"
         android:max="100"/>
 
     <Button
@@ -47,8 +47,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="10dp"
         android:text="@string/steps_target"
-        app:layout_constraintBottom_toTopOf="@+id/sbSteps"
-        app:layout_constraintStart_toStartOf="@+id/sbSteps" />
+        app:layout_constraintBottom_toTopOf="@+id/sbHeight"
+        app:layout_constraintStart_toStartOf="@+id/sbHeight" />
 
     <TextView
         android:id="@+id/tvWeight"
@@ -68,7 +68,7 @@
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/tvScore"
-        app:layout_constraintEnd_toEndOf="@+id/sbSteps"
+        app:layout_constraintEnd_toEndOf="@+id/sbHeight"
         app:layout_constraintHorizontal_bias="0.367"
         app:layout_constraintStart_toEndOf="@+id/tvScore"
         app:layout_constraintTop_toTopOf="@+id/tvScore"

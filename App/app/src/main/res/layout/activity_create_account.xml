@@ -10,38 +10,48 @@
         android:id="@+id/etUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="52dp"
+        android:background="@null"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/name"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        android:background="@null"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="86dp"
-        android:background="@null"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:text="Password"
+        android:id="@+id/etHeight"
+        android:layout_width="66dp"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/sbHeight"
+        app:layout_constraintEnd_toEndOf="@+id/sbHeight"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/sbHeight" />
+
+    <SeekBar
+        android:id="@+id/sbHeight"
+        android:layout_width="239dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="112dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_create_account"
         app:layout_constraintEnd_toEndOf="@+id/etUserName"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="@+id/etUserName"
-        app:layout_constraintTop_toBottomOf="@+id/etUserName" />
+        android:valueFrom="120"
+        android:valueTo="220"
+        />
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
+        android:layout_width="177dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="92dp"
         android:text="@string/stepper"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,11 +59,12 @@
         android:id="@+id/btn_create_account"
         android:layout_width="92dp"
         android:layout_height="50dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginBottom="160dp"
         android:background="@drawable/roundedbutton"
         android:text="@string/register_btn"
-        app:layout_constraintEnd_toEndOf="@+id/etPassword"
-        app:layout_constraintStart_toStartOf="@+id/etPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/sbHeight"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/sbHeight" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
