@@ -103,4 +103,6 @@ public class EditWeightActivity extends AppCompatActivity {
         seekBar.setProgress((int)sp.getFloat("weight", 0));
 
     }
+
+
 }

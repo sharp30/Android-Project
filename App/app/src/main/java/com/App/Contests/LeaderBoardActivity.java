@@ -30,22 +30,21 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
         lv = (ListView)findViewById(R.id.lv);
 
-        //TODO: fill here
-
         users = new ArrayList<User>();
 
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        Query q = ref.child("users").orderByChild("score").limitToFirst(5);
-        q.addListenerForSingleValueEvent(new ValueEventListener()
+        Query q = ref.child("users").orderByChild("score").limitToLast(5);
+        q.addValueEventListener(new ValueEventListener()
         {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {
+                users = new ArrayList<User>();
                 for(DataSnapshot child : snapshot.getChildren())
                 {
                     User u = new User(child.getKey(),(Map<String, Object>)child.getValue());
-                    users.add(u);
+                    users.add(0,u);
 
                 }
                 refresh();

@@ -133,6 +133,10 @@ public class Contest {
         return this.startDate.compareTo(today) > 0 && this.playersAmount > this.players.size() && !this.players.contains(name);
     }
 
+    public boolean isFinished(Date today)
+    {
+        return !this.isClosed && today.compareTo(this.endDate) > 0;
+    }
     public boolean isMine(Date today, String name)
     {
         return this.players.contains(name) && !this.isClosed;

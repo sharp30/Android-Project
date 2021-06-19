@@ -1,8 +1,10 @@
 package com.App.Contests;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,9 +17,15 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.App.Contest;
+import com.App.HomeActivity;
 import com.App.R;
+import com.App.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -135,14 +143,37 @@ CreateContestActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Contest contest = new Contest(etContestName.getText().toString(),cal.getTime(),sbPlayersAmount.getProgress(),sp.getString("logged",""));
-                //TODO: check if values are valid
-                //TODO:check if name doesnt exist
-                ref.child("contests").child(contest.getName()).setValue(contest);
+                Query q = ref.child("contests").child(etContestName.getText().toString());//.orderByChild("username").equalTo(etUsername.getText().toString())
+                q.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()  || etContestName.getText().toString() == "")
+                        {
+                            Toast t = Toast.makeText(getApplicationContext(),"Contest name already exists", Toast.LENGTH_LONG);
+                            t.show();
+                        }
+                        else
+                        {
+                            Contest contest = new Contest(etContestName.getText().toString(),cal.getTime(),sbPlayersAmount.getProgress(),sp.getString("logged",""));
+                            ref.child("contests").child(contest.getName()).setValue(contest);
+
+                            Intent intent = new Intent(getApplicationContext(),ViewContestActivity.class);
+                            intent.putExtra("contest_name",contest.getName());
+
+                            startActivity(intent);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error)
+                    {
+
+                    }
+                });
             }
         });
 
         sbPlayersAmount.setProgress(1);
-
     }
 }

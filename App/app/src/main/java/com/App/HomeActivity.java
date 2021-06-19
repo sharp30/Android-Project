@@ -26,11 +26,22 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class HomeActivity extends Activity implements SensorEventListener {
@@ -42,11 +53,15 @@ public class HomeActivity extends Activity implements SensorEventListener {
 
     ProgressBar pbStep;
     TextView tvStepCount;
+    TextView tvTrophyAmount;
+
     int stepCount;
     BottomNavigationView bottomNavigationView;
     SharedPreferences sp;
     DateFormat df;
     Dal dal;
+
+    DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -54,11 +69,11 @@ public class HomeActivity extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
         sp = getSharedPreferences("values",0);
         dal = new Dal(getApplicationContext());
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED)
         {
-
             //ask for permission
             requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, 0);
         }
@@ -88,7 +103,8 @@ public class HomeActivity extends Activity implements SensorEventListener {
             }
         });
         //initials
-        historyBtn = findViewById(R.id.ibHistory);
+        tvTrophyAmount  = (TextView)findViewById(R.id.tvTrophy);
+        historyBtn = (ImageButton) findViewById(R.id.ibHistory);
 
         //on clicks
         historyBtn.setOnClickListener(new View.OnClickListener() {
@@ -120,9 +136,26 @@ public class HomeActivity extends Activity implements SensorEventListener {
         stepCount = sp.getInt("steps",0);
         updateProgressBar();
 
-
-
         createAlarm();
+
+
+       ref =  FirebaseDatabase.getInstance().getReference();
+       closeContests();
+       Query q = ref.child("users").child(sp.getString("logged","")).child("score");
+
+       q.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot)
+           {
+                Integer value = snapshot.getValue(Integer.class);
+                tvTrophyAmount.setText(value.toString());
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+
+           }
+       });
 
     }
 
@@ -206,6 +239,103 @@ public class HomeActivity extends Activity implements SensorEventListener {
     }
     public void onBackPressed()
     {
+    }
+
+    public void closeContests()
+    {
+        Query q = ref.child("contests");
+        q.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Date today = Calendar.getInstance().getTime();
+
+                for (DataSnapshot child : snapshot.getChildren()) {
+
+                    Contest contest = new Contest((Map<String, Object>) child.getValue());
+                    if (contest.isFinished(today))
+                    {
+                        HashMap<String,Integer> players = new HashMap<>();
+                        for(String player : contest.getPlayers())
+                        {
+                            players.put(player, 0);
+                        }
+                        calcPlayers(players,contest.startDate,contest.endDate);
+                        Map.Entry<String, Integer> maxEntry = null;
+
+                        for (Map.Entry<String, Integer> entry : players.entrySet()) {
+                            if (maxEntry == null || entry.getValue() > maxEntry.getValue()) {
+                                maxEntry = entry;
+                            }
+                        }
+                        HashMap<String, Object> result = new HashMap<>();
+                        result.put("isClosed", true);
+
+                        final String winner = maxEntry.getKey();
+                        ref.child("contests").child(contest.name).child("isClosed").setValue(true);
+
+                        Query q = ref.child("users").child(winner);
+
+                        q.addListenerForSingleValueEvent(new ValueEventListener()
+                        {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot)
+                            {
+                                ref.child("users").child(winner).child("score").setValue(((Long)snapshot.child("score").getValue()).intValue() +1);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void calcPlayers(final HashMap<String, Integer> players, Date startDate, Date endDate) {
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(endDate);
+        String end = sdf.format(cal.getTime());
+        cal.setTime(startDate);
+
+
+        final ArrayList<Date> days = new ArrayList<>();
+        while (end.compareTo(sdf.format(cal.getTime())) >= 0) {
+            days.add(cal.getTime());
+            cal.add(Calendar.DATE, 1);
+        }
+
+        for (final String name : players.keySet()) {
+            {
+                //calculate all steps in this week
+                Query q = ref.child("users").child(name).child("history").orderByKey().limitToFirst(days.size());
+                q.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Integer sum = 0;
+                        for (Date day : days) {
+                            //int index = snapshot.indexOf(day);
+                            String a = sdf.format(day);
+                            if (snapshot.hasChild(sdf.format(day))) {
+                                sum += ((Long) snapshot.child(sdf.format(day)).child("steps").getValue()).intValue();
+                            }
+                        }
+                        players.put(name, sum);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            }
+        }
     }
 
 }

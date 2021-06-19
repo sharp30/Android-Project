@@ -21,7 +21,8 @@
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/sbSteps"
         app:layout_constraintEnd_toEndOf="@+id/sbSteps"
-        app:layout_constraintStart_toStartOf="@+id/sbSteps" />
+        app:layout_constraintStart_toStartOf="@+id/sbSteps"
+        android:gravity="center"/>
 
     <Button
         android:id="@+id/btnUpdate"

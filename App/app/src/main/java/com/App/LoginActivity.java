@@ -31,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(next);
         }
 
-        //todo: check if user is already logged - using shared preference
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
