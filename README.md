@@ -1,2 +1,2 @@
-# Android-Project
+# Stepper
 Android final project.
