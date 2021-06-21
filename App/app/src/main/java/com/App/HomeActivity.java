@@ -69,7 +69,6 @@ public class HomeActivity extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
         sp = getSharedPreferences("values",0);
         dal = new Dal(getApplicationContext());
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED)
@@ -105,7 +104,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
         //initials
         tvTrophyAmount  = (TextView)findViewById(R.id.tvTrophy);
         historyBtn = (ImageButton) findViewById(R.id.ibHistory);
-
+        pbStep = (ProgressBar)findViewById(R.id.progress_bar);
         //on clicks
         historyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +125,6 @@ public class HomeActivity extends Activity implements SensorEventListener {
             return;
 
         tvStepCount = findViewById(R.id.tvStepsAmount);
-        pbStep = findViewById(R.id.progress_bar);
 
         pbStep.setMax(sp.getInt("steps_target",5000));        //other option - save just today - and others on sqldb
         df = new SimpleDateFormat("dd/MM/yyyy");

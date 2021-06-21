@@ -18,13 +18,11 @@ public class PlayersAdapter extends ArrayAdapter<UserHistory>
     {
         super(context,resource,textViewResourceId,players);
         this.context = context;
-        this.players =players;
+        this.players = players;
     }
 
     public View getView(int position, View cellView, ViewGroup parent)
     {
-        //TODO: fix design
-
         LayoutInflater layoutInflater = ((Activity)context).getLayoutInflater();
 
         View view = layoutInflater.inflate(R.layout.player_layout,parent,false);

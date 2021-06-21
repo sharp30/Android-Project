@@ -86,13 +86,22 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable editable)
-            {
-                Integer val= Integer.parseInt(etHeight.getText().toString());
-                if(val < MIN_HEIGHT || val > MAX_HEIGHT) {
-                    etHeight.setText(String.valueOf(MIN_HEIGHT));
+            public void afterTextChanged(Editable editable) {
+                Integer val;
+                try {
+                    val = Integer.parseInt(etHeight.getText().toString());
+
+                } catch (NumberFormatException e) {
+                    val = MIN_HEIGHT;
                 }
-                sbHeight.setProgress(Integer.parseInt(etHeight.getText().toString()));
+                if (val < MIN_HEIGHT) {
+                    sbHeight.setProgress(MIN_HEIGHT);
+                    //etHeight.setText(String.valueOf(MIN_HEIGHT));
+                } else if (val > MAX_HEIGHT) {
+                    sbHeight.setProgress(MIN_HEIGHT);
+                } else {
+                    sbHeight.setProgress(Integer.parseInt(etHeight.getText().toString()));
+                }
             }
         });
 

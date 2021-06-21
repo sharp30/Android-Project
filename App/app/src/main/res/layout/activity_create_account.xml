@@ -22,27 +22,28 @@
 
     <EditText
         android:id="@+id/etHeight"
-        android:layout_width="66dp"
-        android:layout_height="35dp"
+        android:layout_width="119dp"
+        android:layout_height="43dp"
         android:gravity="center"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/sbHeight"
         app:layout_constraintEnd_toEndOf="@+id/sbHeight"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/sbHeight" />
+        app:layout_constraintHorizontal_bias="0.572"
+        app:layout_constraintStart_toStartOf="@+id/sbHeight"
+        app:layout_constraintTop_toBottomOf="@+id/etUserName"
+        app:layout_constraintVertical_bias="1.0" />
 
     <SeekBar
         android:id="@+id/sbHeight"
         android:layout_width="239dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginBottom="72dp"
+        android:min="120"
+        android:max="220"
         app:layout_constraintBottom_toTopOf="@+id/btn_create_account"
         app:layout_constraintEnd_toEndOf="@+id/etUserName"
         app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toStartOf="@+id/etUserName"
-        android:valueFrom="120"
-        android:valueTo="220"
-        />
+        app:layout_constraintStart_toStartOf="@+id/etUserName" />
 
     <TextView
         android:id="@+id/tvTitle"

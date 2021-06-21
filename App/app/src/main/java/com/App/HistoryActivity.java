@@ -47,8 +47,6 @@ public class HistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        //TODO: handle float issue
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         dal = new Dal(getApplicationContext());
@@ -97,6 +95,8 @@ public class HistoryActivity extends AppCompatActivity {
         final Calendar cal = Calendar.getInstance();
         final DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         final DateFormat fbForamt = new SimpleDateFormat("yyyyMMdd");
+        barChart.clear();
+
 
         Random random = new Random();
         //today value
@@ -161,22 +161,19 @@ public class HistoryActivity extends AppCompatActivity {
                 barChart.setDrawGridBackground(false);
 
                 barChart.getAxisLeft().setDrawGridLines(false);
-                barChart.getAxisLeft().setDrawLabels(false);
                 barChart.getAxisLeft().setDrawAxisLine(false);
 
                 barChart.getXAxis().setDrawGridLines(false);
-                barChart.getXAxis().setDrawLabels(false);
                 barChart.getXAxis().setDrawAxisLine(false);
 
                 barChart.getAxisRight().setDrawGridLines(false);
-                barChart.getAxisRight().setDrawLabels(false);
                 barChart.getAxisRight().setDrawAxisLine(false);
 
 
                 barChart.getAxisLeft().setDrawGridLines(false);
                 barChart.getXAxis().setDrawGridLines(false);
 
-                barChart.getXAxis().setDrawLabels(false); // hide bottom label
+                barChart.getXAxis().setDrawLabels(true); // hide bottom label
                 barChart.getAxisLeft().setDrawLabels(false); // hide left label
                 barChart.getAxisRight().setDrawLabels(false); // hide right label
 
@@ -186,7 +183,7 @@ public class HistoryActivity extends AppCompatActivity {
                 {
                     @Override
                     public String getXValue(String original, int index, ViewPortHandler viewPortHandler) {
-                        return labels.get(index);
+                        return labels.get(4-index);
                     }
                 });
                 barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -216,6 +213,7 @@ public class HistoryActivity extends AppCompatActivity {
             colors.add(Color.GREEN);
         else
             colors.add(Color.RED);
+
         entries.add(new BarEntry(val, 4-i));
         labels.add(date);
 
