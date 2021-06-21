@@ -6,6 +6,8 @@
 
     <uses-feature android:name="android.hardware.type.watch" />
 
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,26 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Contests.LeaderBoardActivity"></activity>
-        <activity android:name=".Contests.CreateContestActivity" />
-        <activity android:name=".Contests.ExploreContestsActivity" />
-        <activity android:name=".Contests.MyContestsActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".ContestsScreen" />
-        <activity android:name=".HistoryActivity" />
-        <activity android:name=".MyDetailsActivity" />
-        <activity android:name=".HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <uses-library
-            android:name="com.google.android.wearable"
-            android:required="true" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
@@ -40,6 +23,34 @@
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
+
+        <activity android:name=".Contests.ViewContestActivity"></activity>
+        <activity android:name=".EditWeightActivity" />
+        <activity android:name=".Contests.LeaderBoardActivity" />
+        <activity android:name=".Contests.CreateContestActivity" />
+        <activity android:name=".Contests.ExploreContestsActivity" />
+        <activity android:name=".Contests.MyContestsActivity" />
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".CreateAccountActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ContestsActivity" />
+        <activity android:name=".HistoryActivity" />
+        <activity android:name=".MyDetailsActivity" />
+        <activity android:name=".HomeActivity" />
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

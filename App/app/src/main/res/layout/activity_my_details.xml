@@ -6,4 +6,87 @@
     android:layout_height="match_parent"
     tools:context=".MyDetailsActivity">
 
+    <SeekBar
+        android:id="@+id/sbHeight"
+        android:layout_width="293dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:max="10000"/>
+
+    <SeekBar
+        android:id="@+id/sbWeight"
+        android:layout_width="293dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="188dp"
+        app:layout_constraintEnd_toEndOf="@+id/sbHeight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/sbHeight"
+        app:layout_constraintTop_toBottomOf="@+id/sbHeight"
+        android:max="100"/>
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="97dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/roundedbutton"
+        android:text="@string/update_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/sbWeight"
+        app:layout_constraintStart_toStartOf="@+id/sbWeight"
+        app:layout_constraintTop_toBottomOf="@+id/sbWeight"
+        app:layout_constraintVertical_bias="0.686" />
+
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="87dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/steps_target"
+        app:layout_constraintBottom_toTopOf="@+id/sbHeight"
+        app:layout_constraintStart_toStartOf="@+id/sbHeight" />
+
+    <TextView
+        android:id="@+id/tvWeight"
+        android:layout_width="100dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/weight_target"
+        app:layout_constraintBottom_toTopOf="@+id/sbWeight"
+        app:layout_constraintStart_toStartOf="@+id/sbWeight" />
+
+    <EditText
+        android:id="@+id/edSteps"
+        android:layout_width="82dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="20dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/tvScore"
+        app:layout_constraintEnd_toEndOf="@+id/sbHeight"
+        app:layout_constraintHorizontal_bias="0.367"
+        app:layout_constraintStart_toEndOf="@+id/tvScore"
+        app:layout_constraintTop_toTopOf="@+id/tvScore"
+        app:layout_constraintVertical_bias="1.0"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/edWeight"
+        android:layout_width="79dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="20dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/tvWeight"
+        app:layout_constraintEnd_toEndOf="@+id/sbWeight"
+        app:layout_constraintStart_toEndOf="@+id/tvWeight"
+        app:layout_constraintTop_toTopOf="@+id/tvWeight"
+        app:layout_constraintVertical_bias="0.285"
+        android:gravity="center"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

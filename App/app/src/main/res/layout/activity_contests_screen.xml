@@ -6,4 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".ContestsScreen">
 
+    <ImageButton
+        android:id="@+id/ibLeaderBoard"
+        android:layout_width="407dp"
+        android:layout_height="239dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/leaderboard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ibExplore"
+        app:layout_constraintStart_toStartOf="@+id/ibExplore"
+        app:layout_constraintTop_toBottomOf="@+id/ibExplore"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+    <ImageButton
+        android:id="@+id/ibExplore"
+        android:layout_width="411dp"
+        android:layout_height="221dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/explore_btn"
+        app:layout_constraintEnd_toEndOf="@+id/ibMyContests"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/ibMyContests"
+        app:layout_constraintTop_toBottomOf="@+id/ibMyContests"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+    <ImageButton
+        android:id="@+id/ibMyContests"
+        android:layout_width="411dp"
+        android:layout_height="221dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/leaderboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
 </androidx.constraintlayout.widget.ConstraintLayout>
