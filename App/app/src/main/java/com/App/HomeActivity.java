@@ -11,6 +11,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
@@ -134,7 +135,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
         stepCount = sp.getInt("steps",0);
         updateProgressBar();
 
-        createAlarm();
+        AlarmReceiver.createAlarm(getApplicationContext());
 
 
        ref =  FirebaseDatabase.getInstance().getReference();
@@ -217,19 +218,22 @@ public class HomeActivity extends Activity implements SensorEventListener {
         //Create an alarm manager
         AlarmManager mAlarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
-        //Create the time of day you would like it to go off. Use a calendar
         //just before midnight
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 18);
-        calendar.set(Calendar.MINUTE,14);
+        calendar.set(Calendar.HOUR_OF_DAY,23);
+        calendar.set(Calendar.MINUTE,58);
+
+        AlarmReceiver receiver = new AlarmReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("alarm.running");
+        registerReceiver(receiver, filter);
 
         //Create an intent that points to the receiver. The system will notify the app about the current time, and send a broadcast to the app
         Intent intent = new Intent(this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, DATA_FETCHER_RC,intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        intent.setAction("alarm.running");
 
-        //set time, it is usually a few seconds off your requested time.
-        //initialize the alarm by using inexactrepeating. This allows the system to scheduler your alarm at the most efficient time around your
-        // you can also use setExact however this is not recommended. Use this only if it must be done then.
+        //Create an intent that points to the receiver. The system will notify the app about the current time, and send a broadcast to the app
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, DATA_FETCHER_RC,intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //Also set the interval using the AlarmManager constants
         mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
