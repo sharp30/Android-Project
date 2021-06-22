@@ -27,4 +27,5 @@
     <string name="title_activity_view_contest">ViewContestActivity</string>
     <string name="trophy">trophy</string>
     <string name="init_value">0</string>
+    <string name="height">Height:</string>
 </resources>

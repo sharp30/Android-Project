@@ -25,7 +25,6 @@ public class ContestsAdapter extends ArrayAdapter<Contest>
         LayoutInflater layoutInflater = ((Activity)context).getLayoutInflater();
 
         View view = layoutInflater.inflate(R.layout.contest_layout,parent,false);
-        //TODO: fix design
 
         TextView tvName = (TextView)view.findViewById(R.id.tvName);
         TextView tvDate = (TextView)view.findViewById(R.id.etDate);

@@ -127,7 +127,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                         {
                             User u = new User(etUsername.getText().toString(),sbHeight.getProgress());
                             ref.child("users").child(etUsername.getText().toString()).setValue(u.toMap());
-                            //FireBaseHelper.addUser(new User(etUsername.getText().toString(),100));
                             SharedPreferences.Editor editor = prefs.edit();
                             editor.putString("logged",etUsername.getText().toString());
                             editor.putInt("steps",0);
