@@ -42,7 +42,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         createBtn = findViewById(R.id.btn_create_account);
         etUsername = findViewById(R.id.etUserName);
         etHeight = findViewById(R.id.etHeight);
-        sbHeight = findViewById(R.id.sbHeight);
+        sbHeight = findViewById(R.id.sbStesps);
 
         final int MIN_HEIGHT= 120;
         final int MAX_HEIGHT= 220;
@@ -56,9 +56,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b)
             {
-
                 etHeight.setText(Integer.toString(i));
-
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar)
@@ -88,19 +86,24 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 Integer val;
-                try {
-                    val = Integer.parseInt(etHeight.getText().toString());
+                try
+                { val = Integer.parseInt(etHeight.getText().toString());
 
                 } catch (NumberFormatException e) {
                     val = MIN_HEIGHT;
                 }
-                if (val < MIN_HEIGHT) {
+
+                if (val < MIN_HEIGHT)
+                {
                     sbHeight.setProgress(MIN_HEIGHT);
-                    //etHeight.setText(String.valueOf(MIN_HEIGHT));
-                } else if (val > MAX_HEIGHT) {
-                    sbHeight.setProgress(MIN_HEIGHT);
-                } else {
-                    sbHeight.setProgress(Integer.parseInt(etHeight.getText().toString()));
+                }
+                else if (val > MAX_HEIGHT)
+                {
+                    sbHeight.setProgress(MAX_HEIGHT);
+                }
+                else
+                {
+                    sbHeight.setProgress(Integer.parseInt(val.toString()));
                 }
             }
         });
@@ -124,7 +127,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                         {
                             User u = new User(etUsername.getText().toString(),sbHeight.getProgress());
                             ref.child("users").child(etUsername.getText().toString()).setValue(u.toMap());
-                            //FireBaseHelper.addUser(new User(etUsername.getText().toString(),100));
                             SharedPreferences.Editor editor = prefs.edit();
                             editor.putString("logged",etUsername.getText().toString());
                             editor.putInt("steps",0);

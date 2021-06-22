@@ -59,9 +59,10 @@
 
     <Button
         android:id="@+id/btnCreate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="146dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="76dp"
+        android:background="@drawable/roundedbutton"
         android:text="@string/create_contest"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvTitle"

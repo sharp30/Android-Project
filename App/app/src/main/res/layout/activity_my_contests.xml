@@ -9,7 +9,8 @@
     <ListView
         android:id="@+id/list"
         android:layout_width="352dp"
-        android:layout_height="581dp"
+        android:layout_height="603dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="96dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_create_contest"
         app:layout_constraintEnd_toEndOf="@+id/btn_create_contest"

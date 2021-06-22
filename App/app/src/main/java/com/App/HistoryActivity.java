@@ -36,7 +36,6 @@ import java.util.Random;
 
 public class HistoryActivity extends AppCompatActivity {
     SharedPreferences sp;
-    Dal dal;
     BottomNavigationView bottomNavigationView;
     boolean type = true;
     final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -49,7 +48,6 @@ public class HistoryActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        dal = new Dal(getApplicationContext());
         sp = getSharedPreferences("values",0);
 
         bottomNavigationView = findViewById(R.id.btn_navigation);
@@ -197,16 +195,9 @@ public class HistoryActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-
-
-
-
-
-
     });
 
     }
-
     private void addEntry(float val, String type, int target,int i,String date)
     {
         if (type == "steps" && val > target || type == "weight" && val <= target)

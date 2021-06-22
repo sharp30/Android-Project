@@ -31,21 +31,20 @@ public class MyDetailsActivity extends AppCompatActivity  {
         sp = this.getSharedPreferences("values", Context.MODE_PRIVATE);
 
         weight =(SeekBar)findViewById(R.id.sbWeight);
-        steps =(SeekBar)findViewById(R.id.sbHeight);
+        steps =(SeekBar)findViewById(R.id.sbStesps);
 
         tvWeight = (TextView)findViewById(R.id.tvWeight);
         tvSteps = (TextView)findViewById(R.id.tvScore);
 
         edWeight = (EditText)findViewById(R.id.edWeight);
         edSteps = (EditText)findViewById(R.id.edSteps);
+
         //inital values
         weight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b)
             {
                 edWeight.setText(Integer.toString(i));
-
-
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putInt("weight_target",i);
                 editor.commit();
@@ -92,6 +91,20 @@ public class MyDetailsActivity extends AppCompatActivity  {
             public void afterTextChanged(Editable editable)
             {
                 //check if int
+                int value=0;
+                try
+                {
+                    value = Integer.parseInt(edWeight.getText().toString());
+                }
+                catch(NumberFormatException e)
+                {
+                    value =1;
+                    weight.setProgress(value);
+                    return;
+                }
+
+                weight.setProgress(value);
+
                 weight.setProgress(Integer.parseInt(editable.toString()));
             }
         });
@@ -110,8 +123,21 @@ public class MyDetailsActivity extends AppCompatActivity  {
             @Override
             public void afterTextChanged(Editable editable)
             {
+                int value=0;
+                try
+                {
+                    value = Integer.parseInt(edSteps.getText().toString());
+                }
+                catch(NumberFormatException e)
+                {
+                    value =1;
+                    steps.setProgress(value);
+                    return;
+                }
+
+                steps.setProgress(value);
+
                 //check if int
-                steps.setProgress(Integer.parseInt(editable.toString()));
             }
         });
         steps.setProgress(sp.getInt("steps_target",5000));

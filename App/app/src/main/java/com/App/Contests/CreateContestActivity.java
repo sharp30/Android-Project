@@ -89,7 +89,16 @@ CreateContestActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable)
             {
-                int value = Integer.parseInt(etAmount.getText().toString());
+                int value;
+                try {
+                    value = Integer.parseInt(etAmount.getText().toString());
+                }
+                catch(NumberFormatException e)
+                {
+                    value =1;
+                    sbPlayersAmount.setProgress(value);
+                    return;
+                }
                 value = Math.max(1,value);
                 value = Math.min(value,sbPlayersAmount.getMax());
                 if(value != Integer.parseInt(etAmount.getText().toString()))

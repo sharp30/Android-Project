@@ -7,6 +7,7 @@
     <uses-feature android:name="android.hardware.type.watch" />
 
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -16,21 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--
-               Set to true if your app is Standalone, that is, it does not require the handheld
-               app to run.
-        -->
-        <meta-data
-            android:name="com.google.android.wearable.standalone"
-            android:value="true" />
-
-        <activity android:name=".Contests.ViewContestActivity"></activity>
+        <activity android:name=".Contests.ViewContestActivity"/>
         <activity android:name=".EditWeightActivity" />
         <activity android:name=".Contests.LeaderBoardActivity" />
         <activity android:name=".Contests.CreateContestActivity" />
         <activity android:name=".Contests.ExploreContestsActivity" />
         <activity android:name=".Contests.MyContestsActivity" />
-        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".CreateAccountActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,13 +36,23 @@
         <activity android:name=".HomeActivity" />
 
         <receiver
-            android:name=".AlarmReceiver"
+            android:name=".StartUpReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="alarm.running"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

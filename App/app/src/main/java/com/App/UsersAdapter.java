@@ -25,8 +25,6 @@ public class UsersAdapter extends ArrayAdapter<User>
 
     public View getView(int position, View cellView, ViewGroup parent)
     {
-        //TODO: fix design
-
         LayoutInflater layoutInflater = ((Activity)context).getLayoutInflater();
 
         View view = layoutInflater.inflate(R.layout.user_layout,parent,false);
