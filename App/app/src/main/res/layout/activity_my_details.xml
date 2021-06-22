@@ -7,13 +7,14 @@
     tools:context=".MyDetailsActivity">
 
     <SeekBar
-        android:id="@+id/sbHeight"
+        android:id="@+id/sbStesps"
         android:layout_width="293dp"
         android:layout_height="111dp"
         android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:min="0"
         android:max="10000"/>
 
     <SeekBar
@@ -21,10 +22,11 @@
         android:layout_width="293dp"
         android:layout_height="111dp"
         android:layout_marginTop="188dp"
-        app:layout_constraintEnd_toEndOf="@+id/sbHeight"
+        app:layout_constraintEnd_toEndOf="@+id/sbStesps"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/sbHeight"
-        app:layout_constraintTop_toBottomOf="@+id/sbHeight"
+        app:layout_constraintStart_toStartOf="@+id/sbStesps"
+        app:layout_constraintTop_toBottomOf="@+id/sbStesps"
+        android:min="0"
         android:max="100"/>
 
     <Button
@@ -47,8 +49,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="10dp"
         android:text="@string/steps_target"
-        app:layout_constraintBottom_toTopOf="@+id/sbHeight"
-        app:layout_constraintStart_toStartOf="@+id/sbHeight" />
+        app:layout_constraintBottom_toTopOf="@+id/sbStesps"
+        app:layout_constraintStart_toStartOf="@+id/sbStesps" />
 
     <TextView
         android:id="@+id/tvWeight"
@@ -68,7 +70,7 @@
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/tvScore"
-        app:layout_constraintEnd_toEndOf="@+id/sbHeight"
+        app:layout_constraintEnd_toEndOf="@+id/sbStesps"
         app:layout_constraintHorizontal_bias="0.367"
         app:layout_constraintStart_toEndOf="@+id/tvScore"
         app:layout_constraintTop_toTopOf="@+id/tvScore"

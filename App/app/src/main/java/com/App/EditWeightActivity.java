@@ -30,7 +30,7 @@ public class EditWeightActivity extends AppCompatActivity {
         sp = this.getSharedPreferences("values",0);
 
         //find views
-        seekBar = findViewById(R.id.sbHeight);
+        seekBar = findViewById(R.id.sbStesps);
         editText = findViewById(R.id.edWeight);
 
         btnUpdate = findViewById(R.id.btnUpdate);
@@ -71,7 +71,19 @@ public class EditWeightActivity extends AppCompatActivity {
                     @Override
                     public void afterTextChanged(Editable editable)
                     {
-                        seekBar.setProgress(Integer.parseInt(editText.getText().toString()));
+                        int value=0;
+                        try
+                        {
+                            value = Integer.parseInt(editText.getText().toString());
+                        }
+                        catch(NumberFormatException e)
+                        {
+                            value =1;
+                            seekBar.setProgress(value);
+                            return;
+                        }
+
+                        seekBar.setProgress(value);
                     }
                 });
 
@@ -82,7 +94,7 @@ public class EditWeightActivity extends AppCompatActivity {
                     public void onClick(View view)
                     {
                         SharedPreferences.Editor editor = sp.edit();
-                        float val = Float.parseFloat(editText.getText().toString());
+                        float val = (Integer)seekBar.getProgress();
                         editor.putFloat("weight", val);
                         editor.commit();
                         finish();

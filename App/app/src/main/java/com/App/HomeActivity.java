@@ -60,8 +60,6 @@ public class HomeActivity extends Activity implements SensorEventListener {
     BottomNavigationView bottomNavigationView;
     SharedPreferences sp;
     DateFormat df;
-    Dal dal;
-
     DatabaseReference ref;
 
     @Override
@@ -71,7 +69,6 @@ public class HomeActivity extends Activity implements SensorEventListener {
         setContentView(R.layout.activity_home);
 
         sp = getSharedPreferences("values",0);
-        dal = new Dal(getApplicationContext());
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED)
         {
             //ask for permission
@@ -212,33 +209,6 @@ public class HomeActivity extends Activity implements SensorEventListener {
         tvStepCount.setText(String.valueOf(stepCount));
     }
 
-    public void createAlarm() {
-        //System request code
-        int DATA_FETCHER_RC = 123;
-        //Create an alarm manager
-        AlarmManager mAlarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-
-        //just before midnight
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,23);
-        calendar.set(Calendar.MINUTE,58);
-
-        AlarmReceiver receiver = new AlarmReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("alarm.running");
-        registerReceiver(receiver, filter);
-
-        //Create an intent that points to the receiver. The system will notify the app about the current time, and send a broadcast to the app
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        intent.setAction("alarm.running");
-
-        //Create an intent that points to the receiver. The system will notify the app about the current time, and send a broadcast to the app
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, DATA_FETCHER_RC,intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        //Also set the interval using the AlarmManager constants
-        mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pendingIntent);
-
-    }
     public void onBackPressed()
     {
     }
