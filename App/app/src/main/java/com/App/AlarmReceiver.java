@@ -56,12 +56,6 @@ public class AlarmReceiver extends BroadcastReceiver
         calendar.set(Calendar.HOUR_OF_DAY,23);
         calendar.set(Calendar.MINUTE,58);
 
-
-        AlarmReceiver receiver = new AlarmReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("alarm.running");
-        context.registerReceiver(receiver, filter);
-
         //Create an intent that points to the receiver. The system will notify the app about the current time, and send a broadcast to the app
         Intent newIntent = new Intent(context, AlarmReceiver.class);
         newIntent.setAction("alarm.running");

@@ -81,14 +81,16 @@ public class HomeActivity extends Activity implements SensorEventListener {
                 Intent next = null;
                 switch(item.getItemId())
                 {
-                    case R.id.contests_nav:
-                        next = new Intent(getApplicationContext(),ContestsActivity.class);
-                        startActivity(next);
-                        break;
                     case R.id.profile_nav:
                         next = new Intent(getApplicationContext(),MyDetailsActivity.class);
                         startActivity(next);
                         break;
+
+                    case R.id.contests_nav:
+                        next = new Intent(getApplicationContext(),ContestsActivity.class);
+                        startActivity(next);
+                        break;
+
                     case R.id.weight_nav:
                         next = new Intent(getApplicationContext(),EditWeightActivity.class);
                         startActivity(next);
@@ -99,6 +101,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
                 return true;
             }
         });
+
         //initials
         tvTrophyAmount  = (TextView)findViewById(R.id.tvTrophy);
         historyBtn = (ImageButton) findViewById(R.id.ibHistory);
@@ -124,7 +127,7 @@ public class HomeActivity extends Activity implements SensorEventListener {
 
         tvStepCount = findViewById(R.id.tvStepsAmount);
 
-        pbStep.setMax(sp.getInt("steps_target",5000));        //other option - save just today - and others on sqldb
+        pbStep.setMax(sp.getInt("steps_target",5000));
         df = new SimpleDateFormat("dd/MM/yyyy");
 
 
@@ -157,10 +160,10 @@ public class HomeActivity extends Activity implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        if (sensorEvent.sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
-
+        if (sensorEvent.sensor.getType() == Sensor.TYPE_STEP_DETECTOR )
+        {
             stepCount++;
-           updateProgressBar();
+            updateProgressBar();
         }
     }
 
@@ -173,17 +176,16 @@ public class HomeActivity extends Activity implements SensorEventListener {
     //when activity is finally active
     protected void onResume() {
         super.onResume();
-        //if (stepCounter != null)
+        if(stepCounter == null)
+            stepCounter = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+
         sensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_FASTEST);
-        stepCounter = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
 
         if(stepCount == 0)
         {
             stepCount = sp.getInt("steps",0);
         }
         updateProgressBar();
-
-
     }
 
     @Override

@@ -17,15 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--
-               Set to true if your app is Standalone, that is, it does not require the handheld
-               app to run.
-        -->
-        <meta-data
-            android:name="com.google.android.wearable.standalone"
-            android:value="true" />
-
-        <activity android:name=".Contests.ViewContestActivity"></activity>
+        <activity android:name=".Contests.ViewContestActivity"/>
         <activity android:name=".EditWeightActivity" />
         <activity android:name=".Contests.LeaderBoardActivity" />
         <activity android:name=".Contests.CreateContestActivity" />
@@ -52,8 +44,11 @@
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
-        <receiver  android:name=".AlarmReceiver">
-            <intent-filter>
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true">
+        <intent-filter>
             <action android:name="alarm.running"/>
             </intent-filter>
         </receiver>
